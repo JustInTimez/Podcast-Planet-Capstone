@@ -53,3 +53,11 @@ html, body, #root {
 .footer-extra {
   font-size: 13px;
 }
+
+
+.loading-spinner {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 85vh;
+}

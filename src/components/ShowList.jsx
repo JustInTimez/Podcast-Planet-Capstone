@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import MoonLoader from "react-spinners/MoonLoader";
 
 export default function ShowList() {
   const [shows, setShows] = useState([]);
@@ -23,7 +24,11 @@ export default function ShowList() {
   }, []);
 
   if (loading) {
-    return <div>Loading shows...</div>;
+    return (
+      <div className="loading-spinner">
+        <MoonLoader color="#1b7ae4" loading={loading} size={60} />
+      </div>
+    );
   }
 
   return (
