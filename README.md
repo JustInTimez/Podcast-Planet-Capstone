@@ -1,5 +1,5 @@
 # Podcast Planet: Capstone Project
-Capstone frontend project. Fetch and use Podcast information from API. Handle/complete as many User Stories as possible. Built using Vite and React.js
+Capstone frontend project. Fetch and use Podcast information from API. Handle/complete as many User Stories as possible. Built using Vite and React JSX
 
 
 
@@ -11,7 +11,7 @@ Each completed story that is verified by my lecturer will result in me receiving
 
 ---
 
-- [X] Project is deployed to a custom Netlify URL
+- [X] Project is deployed to a custom Netlify URL. Found under repo About section
 - [ ] All views in the app display correct on the smallest mobile devices available “Iphone SE”. This can be emulated in Chrome Dev tools.
 - [X] All favicon information has been created an added correctly via [https://realfavicongenerator.net/](https://realfavicongenerator.net/) (you are welcome to use any free PNG image you find on [https://www.flaticon.com/](https://www.flaticon.com/))
 - [X] All metatag information has been creataed and added via [https://metatags.io/](https://metatags.io/) (You are welcome to use any free image you find on [https://unsplash.com/](https://unsplash.com/)). Be mindful to manually replace all URL values (especially image URL) to absolute Netlify URL values (you will need to deploy to Netlify first)
