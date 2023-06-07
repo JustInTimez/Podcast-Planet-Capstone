@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
+import MoonLoader from "react-spinners/MoonLoader";
 
-export default function ShowList() {
+export default function ShowList({ onShowClick }) {
   const [shows, setShows] = useState([]);
   const [loading, setLoading] = useState(true);
 
@@ -23,13 +24,21 @@ export default function ShowList() {
   }, []);
 
   if (loading) {
-    return <div>Loading shows...</div>;
+    return (
+      <div className="loading-spinner">
+        <MoonLoader color="#1b7ae4" loading={loading} size={60} />
+      </div>
+    );
   }
+
+  const handleShowClick = (showId) => {
+    onShowClick(showId);
+  };
 
   return (
     <div>
       {shows.map((show) => (
-        <div key={show.id}>
+        <div key={show.id} onClick={() => handleShowClick(show.id)}>
           <h3>{show.title}</h3>
           <p>{show.description}</p>
         </div>

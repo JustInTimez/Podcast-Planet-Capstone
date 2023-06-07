@@ -7,12 +7,13 @@ import "./App.css";
 
 function App() {
   const [selectedShowId, setSelectedShowId] = useState(null);
+  
   const handleShowClick = (showId) => {
     setSelectedShowId(showId);
   };
 
-  const handleGoBack = (showId) => {
-    selectedShowId(null);
+  const handleGoBack = () => {
+    setSelectedShowId(null);
   };
 
   return (
