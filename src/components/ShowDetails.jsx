@@ -10,7 +10,7 @@ export default function ShowDetails({ show, onGoBack }) {
       try {
         console.log("Show ID:", show);
         const response = await fetch(
-          `https://podcast-api.netlify.app/shows/${show}`
+          `https://podcast-api.netlify.app/id/${show}`
         );
         const data = await response.json();
         setShowData(data);

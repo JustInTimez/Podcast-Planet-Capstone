@@ -20,6 +20,7 @@ export default function Footer() {
           Unsplash
         </a>
       </p>
+      <p className="footer-extra">Icons made by <a href="https://www.flaticon.com/authors/nixxdsgn" title="Nixxdsgn"> Nixxdsgn </a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></p>
     </footer>
   );
 }
