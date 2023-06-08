@@ -91,6 +91,17 @@ html, body, #root {
   color: gray;
 }
 
+.load-more-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.load-more-button {
+  /* I need to adjust this button's styles later */
+}
+
+
 
 /* FOOTER */
 

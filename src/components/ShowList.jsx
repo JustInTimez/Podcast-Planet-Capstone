@@ -5,6 +5,11 @@ export default function ShowList({ onShowClick }) {
   const [shows, setShows] = useState([]);
   const [loading, setLoading] = useState(true);
 
+  // State for initial number of Shows displayed on page
+  const [visibleShows, setVisibleShows] = useState(8);
+  // State to control display of Show More button
+  const [showLoadMore, setShowLoadMore] = useState(true);
+
   useEffect(() => {
     const fetchShows = async () => {
       try {
@@ -35,6 +40,11 @@ export default function ShowList({ onShowClick }) {
     onShowClick(showId);
   };
 
+  const handleLoadMore = () => {
+    // Increase visible shows by a further 8 for the user
+    setVisibleShows((prevVisibleShows) => prevVisibleShows + 8);
+  };
+
   const clampText = (text, maxLength) => {
     if (text.length <= maxLength) {
       return text;
@@ -44,7 +54,7 @@ export default function ShowList({ onShowClick }) {
 
   return (
     <div className="show-list">
-      {shows.map((show) => (
+      {shows.slice(0, visibleShows).map((show) => (
         <div
           className="show-card"
           key={show.id}
@@ -53,11 +63,25 @@ export default function ShowList({ onShowClick }) {
           <img className="show-image" src={show.image} alt={show.title} />
           <div className="show-details">
             <h3 className="show-title">{show.title}</h3>
-            <p className="show-description">{clampText(show.description, 100)}</p>
+            <p className="show-description">
+              {clampText(show.description, 100)}
+            </p>
             <p className="show-seasons">Seasons: {show.seasons}</p>
           </div>
         </div>
       ))}
+      {showLoadMore && visibleShows < shows.length && (
+        <div className="load-more-container">
+          <button className="load-more-button" onClick={handleLoadMore}>
+            Load More
+          </button>
+        </div>
+      )}
+      {loading && (
+        <div className="loading-spinner">
+          <MoonLoader color="#1b7ae4" loading={loading} size={60} />
+        </div>
+      )}
     </div>
   );
 }
