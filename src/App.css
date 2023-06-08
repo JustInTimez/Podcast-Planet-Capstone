@@ -1,3 +1,5 @@
+/* DOCUMENT */
+
 * {
   box-sizing: border-box;
 }
@@ -13,6 +15,8 @@ html, body, #root {
   margin: 0;
 }
 
+/* APP AREA */
+
 .app {
   display: flex;
   flex-direction: column;
@@ -22,6 +26,8 @@ html, body, #root {
 .content {
   flex: 1;
 }
+
+/* NAVBAR */
 
 .navbar {
   background-color: #1e1e20;
@@ -43,6 +49,52 @@ html, body, #root {
   width: 125px;
 }
 
+
+/* ShowList Display */
+
+.show-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  margin-top: 20px;
+  margin-bottom: 30px;
+  gap: 20px;
+}
+
+.show-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  border: 1px solid #f5f5f5;
+  border-radius: 10px;
+  padding: 10px;
+}
+
+.show-image {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+  margin-bottom: 10px;
+}
+
+.show-title {
+  font-size: 18px;
+  font-weight: bold;
+  margin-top: 10px;
+}
+
+.show-description {
+  font-size: 14px;
+  margin-bottom: 10px;
+}
+
+.show-seasons {
+  font-size: 12px;
+  color: gray;
+}
+
+
+/* FOOTER */
+
 .footer {
   background-color: #1e1e20;
   padding: 20px 0;
@@ -54,6 +106,7 @@ html, body, #root {
   font-size: 13px;
 }
 
+/* LOADING SPINNER */
 
 .loading-spinner {
   display: flex;
