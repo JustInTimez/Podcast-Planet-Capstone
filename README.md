@@ -18,15 +18,15 @@ Each completed story that is verified by my lecturer will result in me receiving
 
 ---
 
-- [ ] All show data loaded via a `fetch` call from the `https://podcast-api.netlify.app/shows`
-- [ ] All data is loaded a `fetch` and no endpoint-specific data is hardcoded
-- [ ] When viewing a specific show data is loaded via `fetch` from individual show endpoint
-- [ ] There is a loading state while initial data is being loaded
+- [X] All show data loaded via a `fetch` call from the `https://podcast-api.netlify.app/shows`
+- [X] All data is loaded a `fetch` and no endpoint-specific data is hardcoded
+- [X] When viewing a specific show data is loaded via `fetch` from individual show endpoint
+- [X] There is a loading state while initial data is being loaded
 - [ ] There is a loading state while new data is being loaded
 
 ---
 
-- [ ] User sees the name of all available shows on the platform
+- [X] User sees the name of all available shows on the platform
 - [ ] User sees shows broken down into seasons, sorted by number
 - [ ] User has a way to listen to any episode in a season for a show
 - [ ] User is able to see a view where only episodes for a specific selected season is shown
@@ -34,7 +34,7 @@ Each completed story that is verified by my lecturer will result in me receiving
 
 ---
 
-- [ ] User sees preview image of shows when browsing
+- [X] User sees preview image of shows when browsing
 - [ ] User sees the amount of season as number in a show when browsing
 - [ ] User sees a human-readable date to when a show was last updated
 - [ ] User sees what genres (as genre titles) a show is associated with when browsing
