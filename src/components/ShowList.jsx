@@ -35,12 +35,27 @@ export default function ShowList({ onShowClick }) {
     onShowClick(showId);
   };
 
+  const clampText = (text, maxLength) => {
+    if (text.length <= maxLength) {
+      return text;
+    }
+    return text.slice(0, maxLength) + "...";
+  };
+
   return (
-    <div>
+    <div className="show-list">
       {shows.map((show) => (
-        <div key={show.id} onClick={() => handleShowClick(show.id)}>
-          <h3>{show.title}</h3>
-          <p>{show.description}</p>
+        <div
+          className="show-card"
+          key={show.id}
+          onClick={() => handleShowClick(show.id)}
+        >
+          <img className="show-image" src={show.image} alt={show.title} />
+          <div className="show-details">
+            <h3 className="show-title">{show.title}</h3>
+            <p className="show-description">{clampText(show.description, 100)}</p>
+            <p className="show-seasons">Seasons: {show.seasons}</p>
+          </div>
         </div>
       ))}
     </div>
