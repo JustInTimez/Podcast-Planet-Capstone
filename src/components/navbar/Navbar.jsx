@@ -1,5 +1,6 @@
 import React from "react";
 import logo from "/images/podcast-planet-logo-planetglow.png";
+import './Navbar.css';
 
 export default function Navbar() {
   return (
