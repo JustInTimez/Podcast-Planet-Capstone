@@ -54,7 +54,7 @@ export default function ShowDetails({ show, onGoBack }) {
         <div>
           <h3>{title}</h3>
           <p>{description}</p>
-          <img className="show-image" src={showData.image} alt={title} />
+          <img className="single-show-image" src={showData.image} alt={title} />
 
           <SeasonSelector
             seasons={seasons}
