@@ -22,7 +22,7 @@ Each completed story that is verified by my lecturer will result in me receiving
 - [X] All data is loaded a `fetch` and no endpoint-specific data is hardcoded
 - [X] When viewing a specific show data is loaded via `fetch` from individual show endpoint
 - [X] There is a loading state while initial data is being loaded
-- [ ] There is a loading state while new data is being loaded
+- [X] There is a loading state while new data is being loaded
 
 ---
 
