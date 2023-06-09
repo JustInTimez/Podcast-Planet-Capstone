@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import MoonLoader from "react-spinners/MoonLoader";
+import './SingleShowDetails.css';
 
 export default function ShowDetails({ show, onGoBack }) {
   const [showData, setShowData] = useState(null);

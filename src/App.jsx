@@ -1,8 +1,8 @@
 import { useState } from "react";
-import Footer from "./components/Footer";
-import Navbar from "./components/Navbar";
-import ShowDetails from "./components/ShowDetails";
-import ShowList from "./components/ShowList";
+import Footer from "./components/footer/Footer";
+import Navbar from "./components/navbar/Navbar";
+import ShowDetails from "./components/singleShowDetails/SingleShowDetails";
+import ShowList from "./components/showList/ShowList";
 import "./App.css";
 
 function App() {

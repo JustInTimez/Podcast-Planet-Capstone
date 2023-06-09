@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import MoonLoader from "react-spinners/MoonLoader";
+import './ShowList.css';
 
 export default function ShowList({ onShowClick }) {
   const [shows, setShows] = useState([]);
@@ -53,23 +54,26 @@ export default function ShowList({ onShowClick }) {
   };
 
   return (
-    <div className="show-list">
-      {shows.slice(0, visibleShows).map((show) => (
-        <div
-          className="show-card"
-          key={show.id}
-          onClick={() => handleShowClick(show.id)}
-        >
-          <img className="show-image" src={show.image} alt={show.title} />
-          <div className="show-details">
-            <h3 className="show-title">{show.title}</h3>
-            <p className="show-description">
-              {clampText(show.description, 100)}
-            </p>
-            <p className="show-seasons">Seasons: {show.seasons}</p>
+    <div className="show-list-container">
+      <div className="show-list">
+        {shows.slice(0, visibleShows).map((show) => (
+          <div
+            className="show-card"
+            key={show.id}
+            onClick={() => handleShowClick(show.id)}
+          >
+            <img className="show-image" src={show.image} alt={show.title} />
+            <div className="show-details">
+              <h3 className="show-title">{show.title}</h3>
+              <p className="show-description">
+                {clampText(show.description, 100)}
+              </p>
+              <p className="show-seasons">Seasons: {show.seasons}</p>
+            </div>
           </div>
-        </div>
-      ))}
+        ))}
+      </div>
+
       {showLoadMore && visibleShows < shows.length && (
         <div className="load-more-container">
           <button className="load-more-button" onClick={handleLoadMore}>
@@ -77,6 +81,7 @@ export default function ShowList({ onShowClick }) {
           </button>
         </div>
       )}
+
       {loading && (
         <div className="loading-spinner">
           <MoonLoader color="#1b7ae4" loading={loading} size={60} />
