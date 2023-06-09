@@ -5,6 +5,12 @@ import './ShowList.css';
 export default function ShowList({ onShowClick }) {
   const [shows, setShows] = useState([]);
   const [loading, setLoading] = useState(true);
+  /*
+  * State for loading more shows
+  * If no state, then my shows area goes blank with spinner until next shows are fetched and appended to DOM
+  * Adding additional state to handle this undesirable behavior
+  */ 
+  const [loadingMore, setLoadingMore] = useState(false);
 
   // State for initial number of Shows displayed on page
   const [visibleShows, setVisibleShows] = useState(8);
@@ -41,9 +47,25 @@ export default function ShowList({ onShowClick }) {
     onShowClick(showId);
   };
 
-  const handleLoadMore = () => {
-    // Increase visible shows by a further 8 for the user
-    setVisibleShows((prevVisibleShows) => prevVisibleShows + 8);
+  const handleLoadMore = async () => {
+    setLoadingMore(true);
+
+    try {
+      /* 
+      * Adding fake delay to API resolve, so that I can show the spinner for loading in new data
+      * To satisfy User Story #9
+      */
+      await new Promise((resolve) => setTimeout(resolve, 1000))
+
+      // Increase visible shows by a further 8 for the user
+      setVisibleShows(prevVisibleShows => prevVisibleShows + 8);
+      setLoading(false);
+
+    } catch (error) {
+      console.error("Issue fetching additional shows. Pls refresh.", error);
+    }
+    // Set loading state to false once the data has been fetched
+    setLoadingMore(false);
   };
 
   const clampText = (text, maxLength) => {
@@ -73,19 +95,19 @@ export default function ShowList({ onShowClick }) {
           </div>
         ))}
       </div>
-
-      {showLoadMore && visibleShows < shows.length && (
-        <div className="load-more-container">
-          <button className="load-more-button" onClick={handleLoadMore}>
-            Load More
-          </button>
-        </div>
-      )}
-
-      {loading && (
+  
+      {loadingMore ? (
         <div className="loading-spinner">
-          <MoonLoader color="#1b7ae4" loading={loading} size={60} />
+          <MoonLoader color="#1b7ae4" loading={true} size={60} />
         </div>
+      ) : (
+        showLoadMore && visibleShows < shows.length && (
+          <div className="load-more-container">
+            <button className="load-more-button" onClick={handleLoadMore}>
+              Load More
+            </button>
+          </div>
+        )
       )}
     </div>
   );

@@ -9,7 +9,6 @@ export default function ShowDetails({ show, onGoBack }) {
   useEffect(() => {
     const fetchShowDetails = async () => {
       try {
-        console.log("Show ID:", show);
         const response = await fetch(
           `https://podcast-api.netlify.app/id/${show}`
         );
