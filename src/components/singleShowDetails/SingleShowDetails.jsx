@@ -9,6 +9,8 @@ export default function ShowDetails({ show, onGoBack }) {
 
   // Set state for the show's seasons
   const [selectedSeason, setSelectedSeason] = useState(1);
+  // Set state for the show's episodes
+  const [selectedSeasonData, setSelectedSeasonData] = useState(null);
 
   useEffect(() => {
     const fetchShowDetails = async () => {
@@ -30,6 +32,15 @@ export default function ShowDetails({ show, onGoBack }) {
     fetchShowDetails();
   }, [show]);
 
+  useEffect(() => {
+    if (showData) {
+      const seasonData = seasons.find(
+        (season) => season.season === selectedSeason
+      );
+      setSelectedSeasonData(seasonData);
+    }
+  }, [selectedSeason, showData]);
+
   const handleSelectSeason = (seasonNumber) => {
     setSelectedSeason(seasonNumber);
   };
@@ -43,9 +54,6 @@ export default function ShowDetails({ show, onGoBack }) {
   }
 
   const { title, description, seasons } = showData;
-  const selectedSeasonData = seasons.find(
-    (season) => season.season === selectedSeason
-  );
 
   return (
     <div className="single-show-details">
@@ -61,16 +69,22 @@ export default function ShowDetails({ show, onGoBack }) {
             onSelectSeason={handleSelectSeason}
           />
 
-          <h4 className="selected-season-title">{selectedSeasonData.title}</h4>
-          <ul className="episode-list">
-            {selectedSeasonData.episodes.map((episode) => (
-              <li key={episode.episode} className="episode-item">
-                <h5 className="episode-title">{episode.title}</h5>
-                <p className="episode-description">{episode.description}</p>
-                {/* Need to add more season info here, later */}
-              </li>
-            ))}
-          </ul>
+          {selectedSeasonData && (
+            <>
+              <h4 className="selected-season-title">
+                {selectedSeasonData.title}
+              </h4>
+              <ul className="episode-list">
+                {selectedSeasonData.episodes.map((episode) => (
+                  <li key={episode.episode} className="episode-item">
+                    <h5 className="episode-title">{episode.title}</h5>
+                    <p className="episode-description">{episode.description}</p>
+                    {/* Need to add more season info here, later */}
+                  </li>
+                ))}
+              </ul>
+            </>
+          )}
           <button className="go-back-btn" onClick={onGoBack}>
             Go Back
           </button>
