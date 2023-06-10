@@ -29,13 +29,13 @@ Each completed story that is verified by my lecturer will result in me receiving
 - [X] User sees the name of all available shows on the platform
 - [ ] User sees shows broken down into seasons, sorted by number
 - [ ] User has a way to listen to any episode in a season for a show
-- [ ] User is able to see a view where only episodes for a specific selected season is shown
-- [ ] User is able to toggle between different seasons for the same show
+- [X] User is able to see a view where only episodes for a specific selected season is shown
+- [X] User is able to toggle between different seasons for the same show
 
 ---
 
 - [X] User sees preview image of shows when browsing
-- [ ] User sees the amount of season as number in a show when browsing
+- [X] User sees the amount of season as number in a show when browsing
 - [ ] User sees a human-readable date to when a show was last updated
 - [ ] User sees what genres (as genre titles) a show is associated with when browsing
 
