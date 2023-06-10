@@ -48,13 +48,12 @@ export default function ShowDetails({ show, onGoBack }) {
   );
 
   return (
-    <div>
-      <button onClick={onGoBack}>Go Back</button>
+    <div className="single-show-details">
       {showData && (
         <div>
-          <h3>{title}</h3>
-          <p>{description}</p>
+          <h3 className="show-title">{title}</h3>
           <img className="single-show-image" src={showData.image} alt={title} />
+          <p className="show-description">{description}</p>
 
           <SeasonSelector
             seasons={seasons}
@@ -62,16 +61,19 @@ export default function ShowDetails({ show, onGoBack }) {
             onSelectSeason={handleSelectSeason}
           />
 
-          <h4>{selectedSeasonData.title}</h4>
-          <ul>
+          <h4 className="selected-season-title">{selectedSeasonData.title}</h4>
+          <ul className="episode-list">
             {selectedSeasonData.episodes.map((episode) => (
-              <li key={episode.episode}>
-                <h5>{episode.title}</h5>
-                <p>{episode.description}</p>
+              <li key={episode.episode} className="episode-item">
+                <h5 className="episode-title">{episode.title}</h5>
+                <p className="episode-description">{episode.description}</p>
                 {/* Need to add more season info here, later */}
               </li>
             ))}
           </ul>
+          <button className="go-back-btn" onClick={onGoBack}>
+            Go Back
+          </button>
         </div>
       )}
     </div>
