@@ -3,7 +3,7 @@ import "./SeasonSelector.css";
 
 const SeasonSelector = ({ seasons, selectedSeason, onSelectSeason }) => {
   return (
-    <div className="season-selctor">
+    <div className="season-selector">
       <label htmlFor="season-select">Select Season:</label>
       <select
         id="season-select"
