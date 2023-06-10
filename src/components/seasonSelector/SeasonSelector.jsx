@@ -8,7 +8,7 @@ const SeasonSelector = ({ seasons, selectedSeason, onSelectSeason }) => {
       <select
         id="season-select"
         value={selectedSeason}
-        onChange={(event) => onSelectedSeason(parseInt(event.target.value))}
+        onChange={(event) => onSelectSeason(parseInt(event.target.value))}
       >
         {seasons.map((season) => (
           <option key={season.season} value={season.season}>

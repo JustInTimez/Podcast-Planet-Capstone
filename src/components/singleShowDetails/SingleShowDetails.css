@@ -1,4 +1,76 @@
+.single-show-details {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    text-align: center;
+}
+
+.show-title {
+    font-size: 32px;
+    margin-bottom: 10px;
+}
+
+.show-description {
+    font-size: 16px;
+    margin-bottom: 20px;
+    color: #fff;
+}
+
 .single-show-image {
-    max-width: 50%;
+    max-width: 300px;
     height: auto;
+    margin-bottom: 20px;
+}
+
+.season-selector {
+    margin-bottom: 20px;
+}
+
+.season-selector select {
+    padding: 10px 20px;
+    font-size: 16px;
+    border: none;
+    background-color: #1b7ae4;
+    color: #fff;
+    cursor: pointer;
+}
+
+.selected-season-title {
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+.episode-list {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    text-align: left;
+    border-radius: 20px;
+    overflow: hidden;
+}
+
+.episode-item {
+    margin-bottom: 20px;
+    padding: 20px;
+    background-color: #444;
+    border-radius: 10px;
+}
+
+.episode-title {
+    font-size: 20px;
+    margin-bottom: 5px;
+}
+
+.episode-description {
+    font-size: 14px;
+    color: #fff;
+}
+
+.go-back-btn {
+    margin: 25px 0px 20px 0px;
+    font-size: 16px;
+    border: none;
+    background-color: #1b7ae4;
+    color: #fff;
 }
