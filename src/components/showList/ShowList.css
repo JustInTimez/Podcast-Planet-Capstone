@@ -43,7 +43,12 @@
 
 .show-seasons {
     font-size: 12px;
-    color: gray;
+    display: inline-block;
+    padding: 4px 8px;
+    background-color: #fff;
+    color: #000;
+    border-radius: 16px;
+    margin-bottom: 5px;
 }
 
 .load-more-container {
