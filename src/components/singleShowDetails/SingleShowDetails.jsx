@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import SeasonSelector from "../seasonSelector/SeasonSelector";
+import Player from "../player/Player";
 import MoonLoader from "react-spinners/MoonLoader";
 import "./SingleShowDetails.css";
 
@@ -11,6 +12,15 @@ export default function ShowDetails({ show, onGoBack }) {
   const [selectedSeason, setSelectedSeason] = useState(1);
   // Set state for the show's episodes
   const [selectedSeasonData, setSelectedSeasonData] = useState(null);
+
+  // Audio Player state
+  const SingleShowDetails = ({ showData }) => {
+    const [selectedEpisode, setSelectedEpisode] = useState(null);
+
+    const handlePlayEpisode = (episode) => {
+      setSelectedEpisode(episode);
+    };
+  };
 
   useEffect(() => {
     const fetchShowDetails = async () => {
@@ -82,6 +92,12 @@ export default function ShowDetails({ show, onGoBack }) {
                     </span>
                     <h5 className="episode-title">{episode.title}</h5>
                     <p className="episode-description">{episode.description}</p>
+                    <button
+                      className="play-button"
+                      onClick={() => handlePlayEpisode(episode)}
+                    >
+                      Play(Change to icon)
+                    </button>
                     {/* Need to add more season info here, later */}
                   </li>
                 ))}
