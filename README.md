@@ -27,7 +27,7 @@ Each completed story that is verified by my lecturer will result in me receiving
 ---
 
 - [X] User sees the name of all available shows on the platform
-- [ ] User sees shows broken down into seasons, sorted by number
+- [X] User sees shows broken down into seasons, sorted by number
 - [ ] User has a way to listen to any episode in a season for a show
 - [X] User is able to see a view where only episodes for a specific selected season is shown
 - [X] User is able to toggle between different seasons for the same show
