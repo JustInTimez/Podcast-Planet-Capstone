@@ -77,6 +77,7 @@ export default function ShowDetails({ show, onGoBack }) {
               <ul className="episode-list">
                 {selectedSeasonData.episodes.map((episode) => (
                   <li key={episode.episode} className="episode-item">
+                    <small className="episode-number">EPISODE: {episode.episode}</small>
                     <h5 className="episode-title">{episode.title}</h5>
                     <p className="episode-description">{episode.description}</p>
                     {/* Need to add more season info here, later */}
