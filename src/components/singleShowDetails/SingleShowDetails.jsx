@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import SeasonSelector from "../seasonSelector/SeasonSelector";
 import Player from "../player/Player";
+import { useDispatch } from "react-redux";
+import { setSelectedEpisode } from "./../../store/actions/playerActions";
 import MoonLoader from "react-spinners/MoonLoader";
 import "./SingleShowDetails.css";
 
@@ -8,19 +10,13 @@ export default function ShowDetails({ show, onGoBack }) {
   const [showData, setShowData] = useState(null);
   const [loading, setLoading] = useState(true);
 
+  // Redux dispatch
+  const dispatch = useDispatch();
+
   // Set state for the show's seasons
   const [selectedSeason, setSelectedSeason] = useState(1);
   // Set state for the show's episodes
   const [selectedSeasonData, setSelectedSeasonData] = useState(null);
-
-  // Audio Player state
-  const SingleShowDetails = ({ showData }) => {
-    const [selectedEpisode, setSelectedEpisode] = useState(null);
-
-    const handlePlayEpisode = (episode) => {
-      setSelectedEpisode(episode);
-    };
-  };
 
   useEffect(() => {
     const fetchShowDetails = async () => {
@@ -53,6 +49,10 @@ export default function ShowDetails({ show, onGoBack }) {
 
   const handleSelectSeason = (seasonNumber) => {
     setSelectedSeason(seasonNumber);
+  };
+
+  const handlePlayEpisode = (episode) => {
+    dispatch(setSelectedEpisode(episode));
   };
 
   if (!showData) {

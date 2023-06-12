@@ -41,7 +41,7 @@ Each completed story that is verified by my lecturer will result in me receiving
 
 ---
 
-- [ ] User sees a preview image of seasons for specific show
+- [X] User sees a preview image of seasons for specific show
 - [ ] User sees the amount of episodes as number for a season
 - [ ] User should see a human-readable date to when a show was uploaded
 - [ ] User are able to go back to a show view from an season-specific view

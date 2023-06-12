@@ -1,4 +1,6 @@
 import { useState } from "react";
+import { Provider } from "react-redux";
+import store from "./store/store";
 import Footer from "./components/footer/Footer";
 import Navbar from "./components/navbar/Navbar";
 import ShowDetails from "./components/singleShowDetails/SingleShowDetails";
@@ -7,7 +9,7 @@ import "./App.css";
 
 function App() {
   const [selectedShowId, setSelectedShowId] = useState(null);
-  
+
   const handleShowClick = (showId) => {
     setSelectedShowId(showId);
   };
@@ -17,17 +19,19 @@ function App() {
   };
 
   return (
-    <div className="app">
-      <Navbar />
-      <div className="content">
-        {selectedShowId ? (
-          <ShowDetails show={selectedShowId} onGoBack={handleGoBack} />
-        ) : (
-          <ShowList onShowClick={handleShowClick} />
-        )}
+    <Provider store={store}>
+      <div className="app">
+        <Navbar />
+        <div className="content">
+          {selectedShowId ? (
+            <ShowDetails show={selectedShowId} onGoBack={handleGoBack} />
+          ) : (
+            <ShowList onShowClick={handleShowClick} />
+          )}
+        </div>
+        <Footer />
       </div>
-      <Footer />
-    </div>
+    </Provider>
   );
 }
 
