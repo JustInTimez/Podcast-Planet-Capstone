@@ -1,6 +1,3 @@
-export const setSelectedEpisode = (episode) => {
-  return {
-    type: "SET_SELECTED_EPISODE",
-    payload: episode,
-  };
-};
+import { createAction } from "@reduxjs/toolkit";
+
+export const setSelectedEpisode = createAction("player/SET_SELECTED_EPISODE");

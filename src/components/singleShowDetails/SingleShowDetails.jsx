@@ -52,7 +52,33 @@ export default function ShowDetails({ show, onGoBack }) {
   };
 
   const handlePlayEpisode = (episode) => {
-    dispatch(setSelectedEpisode(episode));
+    const { seasons } = showData;
+    let selectedEpisode;
+
+    for (const season of seasons) {
+      const { episodes } = season;
+      selectedEpisode = episodes.find((ep) => ep.episode === episode.episode);
+
+      if (selectedEpisode) {
+        break;
+      }
+    }
+
+    if (selectedEpisode) {
+      const { file } = selectedEpisode;
+
+      /* Create a new Audio object with the audio file URL.
+       * The new Audio(file) method, the browser internally handles the fetching of the audio file and buffering it for playback. 
+         It doesn't expose the fetch operation explicitly in the network tab.
+       * It abstracts away the low-level details of fetching and decoding the audio file, providing a simplified interface for playing audio. 
+         When you call audio.play(), the browser takes care of fetching the audio file in the background and playing it.
+       */
+      const audio = new Audio(file);
+
+      audio.play(); // Play the audio
+
+      dispatch(setSelectedEpisode(selectedEpisode));
+    }
   };
 
   if (!showData) {
@@ -102,8 +128,10 @@ export default function ShowDetails({ show, onGoBack }) {
                   </li>
                 ))}
               </ul>
+              <Player />
             </>
           )}
+
           <button className="go-back-btn" onClick={onGoBack}>
             Go Back
           </button>
