@@ -1,59 +1,28 @@
-import React, { useState, useEffect } from "react";
-import { useSelector } from "react-redux";
+import React, { useState, useEffect, useRef } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import MoonLoader from "react-spinners/MoonLoader";
 import "./Player.css";
+import { setSelectedEpisode } from "../../store/actions/playerActions";
 
 const Player = () => {
   const selectedEpisode = useSelector((state) => state.player.selectedEpisode);
-  const [isLoading, setIsLoading] = useState(false);
-  const [audioURL, setAudioURL] = useState(null);
+  const dispatch = useDispatch();
+  const audioRef = useRef(null);
 
   useEffect(() => {
-    setAudioURL(null);
-    setIsLoading(true);
-
-    const fetchAudioFile = async () => {
-      try {
-        if (!selectedEpisode) {
-          throw new Error("No selected episode available");
-        }
-
-        console.log("Fetching audio file:", selectedEpisode.file);
-        const response = await fetch(selectedEpisode.file);
-        console.log("Fetch response status:", response.status);
-
-        if (response.ok) {
-          const blob = await response.blob();
-          const url = URL.createObjectURL(blob);
-          console.log("Audio file URL:", url);
-          setAudioURL(url);
-        } else {
-          throw new Error("Response not OK");
-        }
-      } catch (error) {
-        console.error("Couldn't get your podcast audio. Try again", error);
-      } finally {
-        setIsLoading(false);
-      }
-    };
-
-    fetchAudioFile();
+    if (selectedEpisode) {
+      const { file } = selectedEpisode;
+      audioRef.current.src = file;
+      audioRef.current.play();
+    }
   }, [selectedEpisode]);
-
-  if (isLoading || !selectedEpisode) {
-    return (
-      <div className="loading-spinner">
-        <MoonLoader color="#1b7ae4" loading={true} size={60} />
-      </div>
-    );
-  }
 
   return (
     <div className="player-container">
       <div className="player">
         <h2>{selectedEpisode.title}</h2>
         <p>{selectedEpisode.description}</p>
-        {audioURL && <audio controls src={audioURL} />}
+        <audio id="audioPlayer" ref={audioRef} controls />
       </div>
     </div>
   );
