@@ -66,17 +66,17 @@ export default function ShowDetails({ show, onGoBack }) {
 
     if (selectedEpisode) {
       const { file } = selectedEpisode;
-  
+
       // Clear the existing audio source, if any
-      const audioPlayer = document.getElementById('audioPlayer');
-      audioPlayer.src = '';
-  
+      const audioPlayer = document.getElementById("audioPlayer");
+      audioPlayer.src = "";
+
       // Set the new audio source
       audioPlayer.src = file;
-  
+
       // Play the audio
       audioPlayer.play();
-  
+
       dispatch(setSelectedEpisode(selectedEpisode));
     }
   };
@@ -91,12 +91,21 @@ export default function ShowDetails({ show, onGoBack }) {
 
   const { title, description, seasons } = showData;
 
+  // Amend main image to be the selected season's image
+  const selectedSeasonImage =
+    seasons.find((season) => season.season === selectedSeason)?.image ||
+    showData.image;
+
   return (
     <div className="single-show-details">
       {showData && (
         <div>
           <h3 className="show-title">{title}</h3>
-          <img className="single-show-image" src={showData.image} alt={title} />
+          <img
+            className="single-show-image"
+            src={selectedSeasonImage}
+            alt={title}
+          />
           <p className="show-description">{description}</p>
 
           <SeasonSelector

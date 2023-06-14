@@ -35,7 +35,6 @@
 
 .show-description {
     font-size: 14px;
-    margin-bottom: 10px;
 }
 
 .show-seasons {
@@ -72,7 +71,7 @@
 .genre-pill {
     font-size: 12px;
     display: inline-block;
-    padding: 2px 6px;
+    padding: 4px 8px;
     background-color: #3d3d3d;
     color: #ffffff;
     border-radius: 16px;
