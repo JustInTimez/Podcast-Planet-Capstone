@@ -119,6 +119,7 @@ export default function ShowDetails({ show, onGoBack }) {
               <h4 className="selected-season-title">
                 {selectedSeasonData.title}
               </h4>
+              <p className="season-episodes">Episodes: {selectedSeasonData.episodes.length}</p>
               <ul className="episode-list">
                 {selectedSeasonData.episodes.map((episode) => (
                   <li key={episode.episode} className="episode-item">
