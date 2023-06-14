@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import MoonLoader from "react-spinners/MoonLoader";
+import { format } from "date-fns";
 import './ShowList.css';
 
 export default function ShowList({ onShowClick }) {
@@ -75,6 +76,12 @@ export default function ShowList({ onShowClick }) {
     return text.slice(0, maxLength) + "...";
   };
 
+
+  const formatDate = (dateString) => {
+    const date = new Date(dateString);
+    return format(date, "d MMMM, yyyy");
+  };
+
   return (
     <div className="show-list-container">
       <div className="show-list">
@@ -87,10 +94,11 @@ export default function ShowList({ onShowClick }) {
             <img className="show-image" src={show.image} alt={show.title} />
             <div className="show-details">
               <h3 className="show-title">{show.title}</h3>
+              <p className="show-seasons">Seasons: {show.seasons}</p>
               <p className="show-description">
                 {clampText(show.description, 100)}
               </p>
-              <p className="show-seasons">Seasons: {show.seasons}</p>
+              <p className="last-updated">Updated: {formatDate(show.updated)}</p>
             </div>
           </div>
         ))}
