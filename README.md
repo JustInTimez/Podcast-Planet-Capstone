@@ -37,7 +37,7 @@ Each completed story that is verified by my lecturer will result in me receiving
 - [X] User sees preview image of shows when browsing
 - [X] User sees the amount of season as number in a show when browsing
 - [X] User sees a human-readable date to when a show was last updated
-- [ ] User sees what genres (as genre titles) a show is associated with when browsing
+- [X] User sees what genres (as genre titles) a show is associated with when browsing
 
 ---
 

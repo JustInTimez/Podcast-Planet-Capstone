@@ -82,6 +82,27 @@ export default function ShowList({ onShowClick }) {
     return format(date, "d MMMM, yyyy");
   };
 
+  // Map genres as recommended in brief
+  const genreMapping = {
+    1: "Personal Growth",
+    2: "Investigative Journalism",
+    3: "History",
+    4: "Comedy",
+    5: "Entertainment",
+    6: "Business",
+    7: "Fiction",
+    8: "News",
+    9: "Kids and Family",
+  };
+
+  const getGenreTitles = (genreIds) => {
+    return genreIds.map((genreId) => (
+      <span className="genre-pill" key={genreId}>
+        {genreMapping[genreId]}
+      </span>
+    ));
+  };
+
   return (
     <div className="show-list-container">
       <div className="show-list">
@@ -98,6 +119,12 @@ export default function ShowList({ onShowClick }) {
               <p className="show-description">
                 {clampText(show.description, 100)}
               </p>
+              <div className="genre-container">
+                <span className="genre-label">Genres</span>
+                <div className="genre-list">
+                  <p className="show-genres">{getGenreTitles(show.genres)}</p>
+                </div>
+              </div>
               <p className="last-updated">Updated: {formatDate(show.updated)}</p>
             </div>
           </div>

@@ -48,9 +48,57 @@
     margin-bottom: 0px;
 }
 
+
+/* Genres */
+.genre-container {
+    display: inline-block;
+    position: relative;
+    border: 1px solid #ccc;
+    padding: 5px;
+    border-radius: 4px;
+}
+
+.genre-label {
+    position: absolute;
+    background-color: #242424;
+    top: -8px;
+    left: 8px;
+    padding: 0 4px;
+    font-size: 12px;
+    font-weight: bold;
+    color: #47cff1;
+}
+
+.genre-pill {
+    font-size: 12px;
+    display: inline-block;
+    padding: 2px 6px;
+    background-color: #3d3d3d;
+    color: #ffffff;
+    border-radius: 16px;
+    margin-bottom: 0px;
+    margin-right: 4px;
+}
+
+.genre-pill:last-child {
+    margin-right: 0;
+}
+
+
+.genre-list {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.show-genres {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+
 .last-updated {
     font-size: 10px;
-    
+
 }
 
 .load-more-container {
