@@ -3,6 +3,6 @@ import './Favourites.css';
 
 export default function Favourites() {
   return (
-    <div></div>
+    <div>Your Favourites:</div>
   );
 }

@@ -4,19 +4,22 @@ import Player from "../player/Player";
 import { useDispatch } from "react-redux";
 import { setSelectedEpisode } from "./../../store/actions/playerActions";
 import MoonLoader from "react-spinners/MoonLoader";
+import { AiFillHeart, AiOutlineHeart } from "react-icons/ai";
 import "./SingleShowDetails.css";
 
 export default function ShowDetails({ show, onGoBack }) {
+  // STATES:
   const [showData, setShowData] = useState(null);
   const [loading, setLoading] = useState(true);
-
-  // Redux dispatch
-  const dispatch = useDispatch();
-
   // Set state for the show's seasons
   const [selectedSeason, setSelectedSeason] = useState(1);
   // Set state for the show's episodes
   const [selectedSeasonData, setSelectedSeasonData] = useState(null);
+  // State for favourited episodes
+  const [favoriteEpisodes, setFavoriteEpisodes] = useState([]);
+
+  // Redux dispatch
+  const dispatch = useDispatch();
 
   useEffect(() => {
     const fetchShowDetails = async () => {
@@ -81,6 +84,18 @@ export default function ShowDetails({ show, onGoBack }) {
     }
   };
 
+  const addToFavorites = (episode) => {
+    if (isFavorite(episode)) {
+      // Remove from favorites
+      setFavoriteEpisodes((prevFavorites) =>
+        prevFavorites.filter((favEpisode) => favEpisode !== episode)
+      );
+    } else {
+      // Add to favorites
+      setFavoriteEpisodes((prevFavorites) => [...prevFavorites, episode]);
+    }
+  };
+
   if (!showData) {
     return (
       <div className="loading-spinner">
@@ -90,6 +105,8 @@ export default function ShowDetails({ show, onGoBack }) {
   }
 
   const { title, description, seasons } = showData;
+
+  const isFavorite = (episode) => favoriteEpisodes.includes(episode);
 
   // Amend main image to be the selected season's image
   const selectedSeasonImage =
@@ -119,7 +136,9 @@ export default function ShowDetails({ show, onGoBack }) {
               <h4 className="selected-season-title">
                 {selectedSeasonData.title}
               </h4>
-              <p className="season-episodes">Episodes: {selectedSeasonData.episodes.length}</p>
+              <p className="season-episodes">
+                Episodes: {selectedSeasonData.episodes.length}
+              </p>
               <ul className="episode-list">
                 {selectedSeasonData.episodes.map((episode) => (
                   <li key={episode.episode} className="episode-item">
@@ -127,6 +146,17 @@ export default function ShowDetails({ show, onGoBack }) {
                       EPISODE: {episode.episode}
                     </span>
                     <h5 className="episode-title">{episode.title}</h5>
+                    {isFavorite(episode) ? (
+                      <AiFillHeart
+                        className="favourite-icon"
+                        onClick={() => addToFavorites(episode)}
+                      />
+                    ) : (
+                      <AiOutlineHeart
+                        className="favourite-icon"
+                        onClick={() => addToFavorites(episode)}
+                      />
+                    )}
                     <p className="episode-description">{episode.description}</p>
                     <button
                       className="play-button"
