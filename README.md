@@ -47,8 +47,8 @@ Each completed story that is verified by my lecturer will result in me receiving
 
 ---
 
-- [ ] User is able to mark specific episodes as favourites so that they can find them again
-- [ ] User can visit a view where they see all their favourites
+- [X] User is able to mark specific episodes as favourites so that they can find them again
+- [X] User can visit a view where they see all their favourites
 - [ ] User is able to see the associated show and season when episode in favourite
 - [ ] Related by season/show epsiodes are grouped together in favourites
 - [ ] User is able able to remove episodes from their favourites

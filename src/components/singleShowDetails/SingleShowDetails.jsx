@@ -87,14 +87,43 @@ export default function ShowDetails({ show, onGoBack }) {
   const addToFavorites = (episode) => {
     if (isFavorite(episode)) {
       // Remove from favorites
-      setFavoriteEpisodes((prevFavorites) =>
-        prevFavorites.filter((favEpisode) => favEpisode !== episode)
+      const updatedFavorites = favoriteEpisodes.filter(
+        (favEpisode) =>
+          favEpisode.episode !== episode.episode ||
+          favEpisode.show !== title ||
+          favEpisode.season !== selectedSeason
       );
+      setFavoriteEpisodes(updatedFavorites);
+      localStorage.setItem('favoriteEpisodes', JSON.stringify(updatedFavorites));
     } else {
       // Add to favorites
-      setFavoriteEpisodes((prevFavorites) => [...prevFavorites, episode]);
+      const newFavorite = {
+        ...episode,
+        show: title,
+        season: selectedSeason,
+      };
+      const updatedFavorites = [...favoriteEpisodes, newFavorite];
+      setFavoriteEpisodes(updatedFavorites);
+      localStorage.setItem('favoriteEpisodes', JSON.stringify(updatedFavorites));
     }
   };
+  
+  const checkIsFavorite = (episode) => {
+    return favoriteEpisodes.some(
+      (favEpisode) =>
+        favEpisode.episode === episode.episode &&
+        favEpisode.show === title &&
+        favEpisode.season === selectedSeason
+    );
+  };
+  
+  const isFavorite = (episode) =>
+  favoriteEpisodes.some(
+    (favEpisode) =>
+      favEpisode.episode === episode.episode &&
+      favEpisode.show === title &&
+      favEpisode.season === selectedSeason
+  );
 
   if (!showData) {
     return (
@@ -106,7 +135,6 @@ export default function ShowDetails({ show, onGoBack }) {
 
   const { title, description, seasons } = showData;
 
-  const isFavorite = (episode) => favoriteEpisodes.includes(episode);
 
   // Amend main image to be the selected season's image
   const selectedSeasonImage =
@@ -164,7 +192,6 @@ export default function ShowDetails({ show, onGoBack }) {
                     >
                       Play(Change to icon)
                     </button>
-                    {/* Need to add more season info here, later */}
                   </li>
                 ))}
               </ul>
