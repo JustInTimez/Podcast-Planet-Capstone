@@ -43,7 +43,6 @@ Each completed story that is verified by my lecturer will result in me receiving
 
 - [X] User sees a preview image of seasons for specific show
 - [X] User sees the amount of episodes as number for a season
-- [ ] User should see a human-readable date to when a show was uploaded - *Can't find this, only find "updated" fields*
 - [X] User is able to go back to a show view from an season-specific view
 
 ---
@@ -80,6 +79,7 @@ Each completed story that is verified by my lecturer will result in me receiving
 - [ ] App remembers and shows what episodes user listened all the way through
 - [ ] App remembers the exact timestamp where user stoped listening within a 10 seconds accuracy of closing
 - [ ] App remembers and shows the exact timestamp location of where I left off any episode
+- [ ] User has the option to "reset" all there progress, effectively removing their listening history
 
 ---
 
