@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Provider } from "react-redux";
 import store from "./store/store";
+// import { createClient } from "@supabase/supabase-js";
 
 // COMPONENTS
 import Footer from "./components/footer/Footer";
@@ -16,6 +17,15 @@ function App() {
   const [selectedShowId, setSelectedShowId] = useState(null);
   const [showFavorites, setShowFavorites] = useState(false);
   const [favoriteEpisodes, setFavoriteEpisodes] = useState([]);
+
+  // useEffect(() => {
+  //   // Initialize Supabase client
+  //   const supabaseClient = createClient(
+  //     "https://piyjipnwgzaldrhiwasu.supabase.co",
+  //     "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InBpeWppcG53Z3phbGRyaGl3YXN1Iiwicm9sZSI6ImFub24iLCJpYXQiOjE2ODY5MTkzNDIsImV4cCI6MjAwMjQ5NTM0Mn0.glGKpBRYQip8aUa6ZquhF3aULZNRJAYBaSaqGYngCKM"
+  //   );
+  //   setSupabase(supabaseClient);
+  // }, []);
 
   const handleShowClick = (showId) => {
     setSelectedShowId(showId);
@@ -33,7 +43,10 @@ function App() {
   return (
     <Provider store={store}>
       <div className="app">
-        <Navbar onFavoritesClick={handleFavoritesClick} showFavorites={showFavorites} />
+        <Navbar
+          onFavoritesClick={handleFavoritesClick}
+          showFavorites={showFavorites}
+        />
         <div className="content">
           {showFavorites ? (
             <Favourites favoriteEpisodes={favoriteEpisodes} />
