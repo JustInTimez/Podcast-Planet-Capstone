@@ -84,7 +84,7 @@ export default function ShowDetails({ show, onGoBack }) {
     }
   };
 
-  const addToFavorites = (episode) => {
+  const toggleFavorite = (episode) => {
     if (isFavorite(episode)) {
       // Remove from favorites
       const updatedFavorites = favoriteEpisodes.filter(
@@ -95,6 +95,7 @@ export default function ShowDetails({ show, onGoBack }) {
       );
       setFavoriteEpisodes(updatedFavorites);
       localStorage.setItem('favoriteEpisodes', JSON.stringify(updatedFavorites));
+
     } else {
       // Add to favorites
       const newFavorite = {
@@ -106,15 +107,6 @@ export default function ShowDetails({ show, onGoBack }) {
       setFavoriteEpisodes(updatedFavorites);
       localStorage.setItem('favoriteEpisodes', JSON.stringify(updatedFavorites));
     }
-  };
-  
-  const checkIsFavorite = (episode) => {
-    return favoriteEpisodes.some(
-      (favEpisode) =>
-        favEpisode.episode === episode.episode &&
-        favEpisode.show === title &&
-        favEpisode.season === selectedSeason
-    );
   };
   
   const isFavorite = (episode) =>
@@ -177,12 +169,12 @@ export default function ShowDetails({ show, onGoBack }) {
                     {isFavorite(episode) ? (
                       <AiFillHeart
                         className="favourite-icon"
-                        onClick={() => addToFavorites(episode)}
+                        onClick={() => toggleFavorite(episode)}
                       />
                     ) : (
                       <AiOutlineHeart
                         className="favourite-icon"
-                        onClick={() => addToFavorites(episode)}
+                        onClick={() => toggleFavorite(episode)}
                       />
                     )}
                     <p className="episode-description">{episode.description}</p>
