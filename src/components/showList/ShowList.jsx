@@ -1,22 +1,24 @@
 import React, { useState, useEffect } from "react";
 import MoonLoader from "react-spinners/MoonLoader";
 import { format } from "date-fns";
-import './ShowList.css';
+import "./ShowList.css";
 
 export default function ShowList({ onShowClick }) {
   const [shows, setShows] = useState([]);
   const [loading, setLoading] = useState(true);
   /*
-  * State for loading more shows
-  * If no state, then my shows area goes blank with spinner until next shows are fetched and appended to DOM
-  * Adding additional state to handle this undesirable behavior
-  */ 
+   * State for loading more shows
+   * If no state, then my shows area goes blank with spinner until next shows are fetched and appended to DOM
+   * Adding additional state to handle this undesirable behavior
+   */
   const [loadingMore, setLoadingMore] = useState(false);
 
   // State for initial number of Shows displayed on page
   const [visibleShows, setVisibleShows] = useState(8);
   // State to control display of Show More button
   const [showLoadMore, setShowLoadMore] = useState(true);
+  // State for the selected sorting option
+  const [sortBy, setSortBy] = useState("");
 
   useEffect(() => {
     const fetchShows = async () => {
@@ -36,6 +38,28 @@ export default function ShowList({ onShowClick }) {
     fetchShows();
   }, []);
 
+  // Sorting
+  const applySorting = () => {
+    let sortedShows = [...shows];
+
+    if (sortBy === "titleAsc") {
+      sortedShows.sort((a, b) => a.title.localeCompare(b.title));
+    } else if (sortBy === "titleDesc") {
+      sortedShows.sort((a, b) => b.title.localeCompare(a.title));
+    } else if (sortBy === "recent") {
+      sortedShows.sort((a, b) => new Date(b.updated) - new Date(a.updated));
+    } else if (sortBy === "leastRecent") {
+      sortedShows.sort((a, b) => new Date(a.updated) - new Date(b.updated));
+    }
+
+    setShows(sortedShows);
+  };
+
+  useEffect(() => {
+    applySorting();
+    setVisibleShows(8); // Reset visible shows when sorting changes
+  }, [sortBy]);
+
   if (loading) {
     return (
       <div className="loading-spinner">
@@ -52,16 +76,15 @@ export default function ShowList({ onShowClick }) {
     setLoadingMore(true);
 
     try {
-      /* 
-      * Adding fake delay to API resolve, so that I can show the spinner for loading in new data
-      * To satisfy User Story #9
-      */
-      await new Promise((resolve) => setTimeout(resolve, 1000))
+      /*
+       * Adding fake delay to API resolve, so that I can show the spinner for loading in new data
+       * To satisfy User Story #9
+       */
+      await new Promise((resolve) => setTimeout(resolve, 1000));
 
       // Increase visible shows by a further 8 for the user
-      setVisibleShows(prevVisibleShows => prevVisibleShows + 8);
+      setVisibleShows((prevVisibleShows) => prevVisibleShows + 8);
       setLoading(false);
-
     } catch (error) {
       console.error("Issue fetching additional shows. Pls refresh.", error);
     }
@@ -75,7 +98,6 @@ export default function ShowList({ onShowClick }) {
     }
     return text.slice(0, maxLength) + "...";
   };
-
 
   const formatDate = (dateString) => {
     const date = new Date(dateString);
@@ -105,6 +127,20 @@ export default function ShowList({ onShowClick }) {
 
   return (
     <div className="show-list-container">
+      <div className="sorting-options">
+        <label htmlFor="sortBy">Sort By:</label>
+        <select
+          id="sortBy"
+          value={sortBy}
+          onChange={(e) => setSortBy(e.target.value)}
+        >
+          <option value="">None</option>
+          <option value="titleAsc">Title (A-Z)</option>
+          <option value="titleDesc">Title (Z-A)</option>
+          <option value="recent">Most Recent Updated</option>
+          <option value="leastRecent">Least Recent Updated</option>
+        </select>
+      </div>
       <div className="show-list">
         {shows.slice(0, visibleShows).map((show) => (
           <div
@@ -125,18 +161,21 @@ export default function ShowList({ onShowClick }) {
                   <p className="show-genres">{getGenreTitles(show.genres)}</p>
                 </div>
               </div>
-              <p className="last-updated">Updated: {formatDate(show.updated)}</p>
+              <p className="last-updated">
+                Updated: {formatDate(show.updated)}
+              </p>
             </div>
           </div>
         ))}
       </div>
-  
+
       {loadingMore ? (
         <div className="loading-spinner">
           <MoonLoader color="#1b7ae4" loading={true} size={60} />
         </div>
       ) : (
-        showLoadMore && visibleShows < shows.length && (
+        showLoadMore &&
+        visibleShows < shows.length && (
           <div className="load-more-container">
             <button className="load-more-button" onClick={handleLoadMore}>
               Load More

@@ -55,10 +55,10 @@ Each completed story that is verified by my lecturer will result in me receiving
 
 ---
 
-- [ ] User is able to arrange list of shows based on title from A-Z
-- [ ] User is able to arrange list of shows based on title from Z-A
-- [ ] User is able to arrange list of showing the most recent updated
-- [ ] User is able to arrange list of shows from least recent updated
+- [X] User is able to arrange list of shows based on title from A-Z
+- [X] User is able to arrange list of shows based on title from Z-A
+- [X] User is able to arrange list of showing the most recent updated
+- [X] User is able to arrange list of shows from least recent updated
 - [ ] User is able to filter shows based on title by means of a text input
 - [ ] User is able to find shows based on fuzzy matching of concepts (you can use something like [https://fusejs.io/](https://fusejs.io/))
 
