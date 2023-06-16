@@ -15,6 +15,7 @@ function App() {
   // States
   const [selectedShowId, setSelectedShowId] = useState(null);
   const [showFavorites, setShowFavorites] = useState(false);
+  const [favoriteEpisodes, setFavoriteEpisodes] = useState([]);
 
   const handleShowClick = (showId) => {
     setSelectedShowId(showId);
@@ -25,7 +26,8 @@ function App() {
   };
 
   const handleFavoritesClick = () => {
-    setShowFavorites(!showFavorites);
+    setShowFavorites((prevState) => !prevState);
+    setSelectedShowId(null);
   };
 
   return (
@@ -34,7 +36,7 @@ function App() {
         <Navbar onFavoritesClick={handleFavoritesClick} showFavorites={showFavorites} />
         <div className="content">
           {showFavorites ? (
-            <Favourites />
+            <Favourites favoriteEpisodes={favoriteEpisodes} />
           ) : selectedShowId ? (
             <ShowDetails show={selectedShowId} onGoBack={handleGoBack} />
           ) : (
