@@ -19,6 +19,8 @@ export default function ShowList({ onShowClick }) {
   const [showLoadMore, setShowLoadMore] = useState(true);
   // State for the selected sorting option
   const [sortBy, setSortBy] = useState("");
+  // State for typed filtering
+  const [filterValue, setFilterValue] = useState("");
 
   useEffect(() => {
     const fetchShows = async () => {
@@ -140,33 +142,45 @@ export default function ShowList({ onShowClick }) {
           <option value="recent">Most Recent Updated</option>
           <option value="leastRecent">Least Recent Updated</option>
         </select>
+        Search:
+        <input
+          type="text"
+          value={filterValue}
+          onChange={(e) => setFilterValue(e.target.value)}
+          placeholder="Filter by title"
+        />
       </div>
       <div className="show-list">
-        {shows.slice(0, visibleShows).map((show) => (
-          <div
-            className="show-card"
-            key={show.id}
-            onClick={() => handleShowClick(show.id)}
-          >
-            <img className="show-image" src={show.image} alt={show.title} />
-            <div className="show-details">
-              <h3 className="show-title">{show.title}</h3>
-              <p className="show-seasons">Seasons: {show.seasons}</p>
-              <p className="show-description">
-                {clampText(show.description, 100)}
-              </p>
-              <div className="genre-container">
-                <span className="genre-label">Genres</span>
-                <div className="genre-list">
-                  <p className="show-genres">{getGenreTitles(show.genres)}</p>
+        {shows
+          .filter((show) =>
+            show.title.toLowerCase().includes(filterValue.toLowerCase())
+          )
+          .slice(0, visibleShows)
+          .map((show) => (
+            <div
+              className="show-card"
+              key={show.id}
+              onClick={() => handleShowClick(show.id)}
+            >
+              <img className="show-image" src={show.image} alt={show.title} />
+              <div className="show-details">
+                <h3 className="show-title">{show.title}</h3>
+                <p className="show-seasons">Seasons: {show.seasons}</p>
+                <p className="show-description">
+                  {clampText(show.description, 100)}
+                </p>
+                <div className="genre-container">
+                  <span className="genre-label">Genres</span>
+                  <div className="genre-list">
+                    <p className="show-genres">{getGenreTitles(show.genres)}</p>
+                  </div>
                 </div>
+                <p className="last-updated">
+                  Updated: {formatDate(show.updated)}
+                </p>
               </div>
-              <p className="last-updated">
-                Updated: {formatDate(show.updated)}
-              </p>
             </div>
-          </div>
-        ))}
+          ))}
       </div>
 
       {loadingMore ? (
