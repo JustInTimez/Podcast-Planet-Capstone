@@ -1,25 +1,22 @@
 import React, { useEffect, useState } from "react";
 import SeasonSelector from "../seasonSelector/SeasonSelector";
 import Player from "../player/Player";
-import { useDispatch } from "react-redux";
-import { setSelectedEpisode } from "./../../store/actions/playerActions";
 import MoonLoader from "react-spinners/MoonLoader";
 import { AiFillHeart, AiOutlineHeart } from "react-icons/ai";
 import "./SingleShowDetails.css";
 
-export default function ShowDetails({ show, onGoBack }) {
-  // STATES:
+export default function ShowDetails({
+  show,
+  onGoBack,
+  toggleFavorite,
+  favoriteEpisodes,
+}) {
   const [showData, setShowData] = useState(null);
   const [loading, setLoading] = useState(true);
-  // Set state for the show's seasons
   const [selectedSeason, setSelectedSeason] = useState(1);
-  // Set state for the show's episodes
   const [selectedSeasonData, setSelectedSeasonData] = useState(null);
-  // State for favourited episodes
-  const [favoriteEpisodes, setFavoriteEpisodes] = useState([]);
 
-  // Redux dispatch
-  const dispatch = useDispatch();
+  // console.log(showData)
 
   useEffect(() => {
     const fetchShowDetails = async () => {
@@ -43,7 +40,7 @@ export default function ShowDetails({ show, onGoBack }) {
 
   useEffect(() => {
     if (showData) {
-      const seasonData = seasons.find(
+      const seasonData = showData.seasons.find(
         (season) => season.season === selectedSeason
       );
       setSelectedSeasonData(seasonData);
@@ -52,6 +49,22 @@ export default function ShowDetails({ show, onGoBack }) {
 
   const handleSelectSeason = (seasonNumber) => {
     setSelectedSeason(seasonNumber);
+    if (showData) {
+      const seasonData = showData.seasons.find(
+        (season) => season.season === seasonNumber
+      );
+      setSelectedSeasonData({ ...seasonData });
+      // if (seasonData) {
+      //   const updatedEpisodes = seasonData.episodes.map((episode) => {
+
+      //     const favorited = favoriteEpisodes.some(
+      //       (favEpisodeKey) => favEpisodeKey === compositeKey
+      //     );
+      //     return { ...episode, favorited };
+      //   });
+      //   // console.log(updatedEpisodes)
+      // }
+    }
   };
 
   const handlePlayEpisode = (episode) => {
@@ -68,54 +81,16 @@ export default function ShowDetails({ show, onGoBack }) {
     }
 
     if (selectedEpisode) {
-      const { file } = selectedEpisode;
-
-      // Clear the existing audio source, if any
-      const audioPlayer = document.getElementById("audioPlayer");
-      audioPlayer.src = "";
-
-      // Set the new audio source
-      audioPlayer.src = file;
-
-      // Play the audio
-      audioPlayer.play();
-
-      dispatch(setSelectedEpisode(selectedEpisode));
+      playEpisode(episode);
     }
   };
 
-  const toggleFavorite = (episode) => {
-    if (isFavorite(episode)) {
-      // Remove from favorites
-      const updatedFavorites = favoriteEpisodes.filter(
-        (favEpisode) =>
-          favEpisode.episode !== episode.episode ||
-          favEpisode.show !== title ||
-          favEpisode.season !== selectedSeason
-      );
-      setFavoriteEpisodes(updatedFavorites);
-      localStorage.setItem('favoriteEpisodes', JSON.stringify(updatedFavorites));
-
-    } else {
-      // Add to favorites
-      const newFavorite = {
-        ...episode,
-        show: title,
-        season: selectedSeason,
-      };
-      const updatedFavorites = [...favoriteEpisodes, newFavorite];
-      setFavoriteEpisodes(updatedFavorites);
-      localStorage.setItem('favoriteEpisodes', JSON.stringify(updatedFavorites));
-    }
+  const episodeIsFavorited = (episode) => {
+    const compositeKey = `${showData.id}-${selectedSeasonData.season}-${episode.episode}`;
+    return favoriteEpisodes.some(
+      (favEpisodeKey) => favEpisodeKey === compositeKey
+    );
   };
-  
-  const isFavorite = (episode) =>
-  favoriteEpisodes.some(
-    (favEpisode) =>
-      favEpisode.episode === episode.episode &&
-      favEpisode.show === title &&
-      favEpisode.season === selectedSeason
-  );
 
   if (!showData) {
     return (
@@ -127,8 +102,6 @@ export default function ShowDetails({ show, onGoBack }) {
 
   const { title, description, seasons } = showData;
 
-
-  // Amend main image to be the selected season's image
   const selectedSeasonImage =
     seasons.find((season) => season.season === selectedSeason)?.image ||
     showData.image;
@@ -166,15 +139,27 @@ export default function ShowDetails({ show, onGoBack }) {
                       EPISODE: {episode.episode}
                     </span>
                     <h5 className="episode-title">{episode.title}</h5>
-                    {isFavorite(episode) ? (
+                    {episodeIsFavorited(episode) ? (
                       <AiFillHeart
                         className="favourite-icon"
-                        onClick={() => toggleFavorite(episode)}
+                        onClick={() =>
+                          toggleFavorite(
+                            episode,
+                            selectedSeasonData,
+                            showData
+                          )
+                        }
                       />
                     ) : (
                       <AiOutlineHeart
                         className="favourite-icon"
-                        onClick={() => toggleFavorite(episode)}
+                        onClick={() =>
+                          toggleFavorite(
+                            episode,
+                            selectedSeasonData,
+                            showData
+                          )
+                        }
                       />
                     )}
                     <p className="episode-description">{episode.description}</p>
