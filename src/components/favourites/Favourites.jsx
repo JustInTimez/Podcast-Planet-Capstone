@@ -106,6 +106,7 @@ const Favourites = ({ favoriteEpisodeIDs, toggleFavorite }) => {
   return (
     <div>
       <h2>Favorite Episodes</h2>
+      <h1>add conditional for if empty, show text that says so</h1>
       <div className="sorting-options">
         <label htmlFor="sortBy">Sort By:</label>
         <select
