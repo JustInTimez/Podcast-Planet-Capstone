@@ -120,13 +120,6 @@ const Favourites = ({ favoriteEpisodeIDs, toggleFavorite, playEpisode }) => {
           <option value="recent">Most Recent Updated</option>
           <option value="leastRecent">Least Recent Updated</option>
         </select>
-        Search:
-        <input
-          type="text"
-          value={filterValue}
-          onChange={(e) => setFilterValue(e.target.value)}
-          placeholder="Filter by title"
-        />
       </div>
       {favoriteEpisodes &&
         favoriteEpisodes.map((favorite) => (
