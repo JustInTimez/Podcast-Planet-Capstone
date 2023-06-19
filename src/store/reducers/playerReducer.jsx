@@ -1,23 +1,19 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { SET_SELECTED_EPISODE } from "../actions/playerActionTypes";
 
 const initialState = {
-  selectedEpisode: {
-    title: "",
-    description: "",
-    file: null,
+  selectedEpisode: null,
+};
+
+const playerReducer = (state = initialState, action) => {
+  switch (action.type) {
+    case SET_SELECTED_EPISODE:
+      return {
+        ...state,
+        selectedEpisode: action.payload,
+      };
+    default:
+      return state;
   }
 };
 
-const playerSlice = createSlice({
-  name: "player",
-  initialState,
-  reducers: {
-    setSelectedEpisode: (state, action) => {
-      console.log(action.payload); // Check if the payload is received correctly
-      state.selectedEpisode = action.payload;
-    },
-  },
-});
-
-export const { setSelectedEpisode } = playerSlice.actions;
-export default playerSlice.reducer;
+export default playerReducer;
