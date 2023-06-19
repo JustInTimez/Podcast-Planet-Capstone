@@ -3,7 +3,7 @@ import MoonLoader from "react-spinners/MoonLoader";
 import { format } from "date-fns";
 import { AiFillHeart } from "react-icons/ai";
 
-const Favourites = ({ favoriteEpisodeIDs, toggleFavorite }) => {
+const Favourites = ({ favoriteEpisodeIDs, toggleFavorite, playEpisode }) => {
   // State
   const [favoriteEpisodes, setFavoriteEpisodes] = useState([]);
   // State for the episode sorting
@@ -42,7 +42,7 @@ const Favourites = ({ favoriteEpisodeIDs, toggleFavorite }) => {
             episode: seasonData.episodes.find(
               (episode) => episode.episode === parseInt(episodeID)
             ),
-            dateAdded: episode.timeStamp
+            dateAdded: episode.timeStamp,
           };
 
           episodes.push(favObject);
@@ -138,6 +138,12 @@ const Favourites = ({ favoriteEpisodeIDs, toggleFavorite }) => {
             <p>Added to Favs: {formatDate(favorite.dateAdded)}</p>
             <p>Updated: {formatDate(favorite.show.updated)}</p>
             {/* Add any other relevant information here */}
+            <button
+              className="play-button"
+              onClick={() => playEpisode(favorite.episode)}
+            >
+              Play
+            </button>
             <button
               onClick={() =>
                 toggleFavorite(favorite.episode, favorite.season, favorite.show)

@@ -27,7 +27,7 @@ Each completed story that is verified by my lecturer will result in me receiving
 
 - [x] User sees the name of all available shows on the platform
 - [x] User sees shows broken down into seasons, sorted by number
-- [ ] User has a way to listen to any episode in a season for a show
+- [x] User has a way to listen to any episode in a season for a show
 - [x] User is able to see a view where only episodes for a specific selected season is shown
 - [x] User is able to toggle between different seasons for the same show
 
@@ -63,7 +63,7 @@ Each completed story that is verified by my lecturer will result in me receiving
 
 ---
 
-- [X] User sees the date and time that I added something as a favourite
+- [x] User sees the date and time that I added something as a favourite
 - [x] User is able to arrange favourites based on title from A-Z
 - [x] User is able to arrange favourites based on title from Z-A
 - [x] User is able to arrange favourites starting with the most recent updated
@@ -71,14 +71,14 @@ Each completed story that is verified by my lecturer will result in me receiving
 
 ---
 
-- [ ] Audio player is always visible so that user can listen to episodes while I browse
+- [X] Audio player is always visible so that user can listen to episodes while I browse
 - [ ] User receives a notification that confirms they want to close the page when audio is playing
 - [ ] App remembers what shows and episode user listened to last when returning to the platform
 - [ ] Automatically filters shows by a genre if the genre label is clicked on
 - [ ] App remembers and shows what episodes user listened all the way through
-- [ ] App remembers the exact timestamp where user stoped listening within a 10 seconds accuracy of closing
+- [ ] App remembers the exact timestamp where user stopped listening within a 10 seconds accuracy of closing
 - [ ] App remembers and shows the exact timestamp location of where I left off any episode
-- [ ] User has the option to "reset" all there progress, effectively removing their listening history
+- [ ] User has the option to "reset" all their progress, effectively removing their listening history
 
 ---
 
