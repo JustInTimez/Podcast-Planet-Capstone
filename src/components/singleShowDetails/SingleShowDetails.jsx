@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import SeasonSelector from "../seasonSelector/SeasonSelector";
-import Player from "../player/Player";
 import MoonLoader from "react-spinners/MoonLoader";
 import { AiFillHeart, AiOutlineHeart } from "react-icons/ai";
 import "./SingleShowDetails.css";
@@ -10,6 +9,7 @@ export default function ShowDetails({
   onGoBack,
   toggleFavorite,
   favoriteEpisodes,
+  playEpisode,
 }) {
   // States
   const [showData, setShowData] = useState(null);
@@ -137,14 +137,13 @@ export default function ShowDetails({
                     <p className="episode-description">{episode.description}</p>
                     <button
                       className="play-button"
-                      onClick={() => handlePlayEpisode(episode)}
+                      onClick={() => playEpisode(episode)}
                     >
-                      Play(Change to icon)
+                      Play
                     </button>
                   </li>
                 ))}
               </ul>
-              <Player />
             </>
           )}
 

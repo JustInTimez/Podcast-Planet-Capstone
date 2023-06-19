@@ -1,7 +1,7 @@
-import React from "react";
-import { useState } from "react";
+import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import store from "./store/store";
+import { setSelectedEpisode } from "./store/actions/playerActions";
+import Player from "./components/player/Player";
 import Footer from "./components/footer/Footer";
 import Navbar from "./components/navbar/Navbar";
 import ShowDetails from "./components/singleShowDetails/SingleShowDetails";
@@ -52,7 +52,9 @@ function App() {
     const compositeKey = `${show.id}-${season.season}-${episode.episode}`;
 
     if (
-      favoriteEpisodes.some((favEpisode) => favEpisode.compositeKey === compositeKey)
+      favoriteEpisodes.some(
+        (favEpisode) => favEpisode.compositeKey === compositeKey
+      )
     ) {
       removeFavorite(compositeKey);
     } else {
@@ -65,10 +67,10 @@ function App() {
    * Sets React state as well as localStorage
    */
   const addFavorite = (compositeKey) => {
-    const timeStamp = new Date;
+    const timeStamp = new Date();
     const favorite = {
       compositeKey: compositeKey,
-      timeStamp: timeStamp
+      timeStamp: timeStamp,
     };
     const updatedFavorites = [...favoriteEpisodes, favorite];
     setFavoriteEpisodes(updatedFavorites);
@@ -91,6 +93,12 @@ function App() {
   //                                FAVOURITES END
   // ==============================================================================
 
+  const dispatch = useDispatch();
+  const playEpisode = (episode) => {
+    dispatch(setSelectedEpisode(episode));
+  };
+
+
   return (
     <div className="app">
       <Navbar
@@ -102,6 +110,7 @@ function App() {
           <Favourites
             favoriteEpisodeIDs={favoriteEpisodes}
             toggleFavorite={toggleFavorite}
+            playEpisode={playEpisode}
           />
         ) : selectedShowId ? (
           <ShowDetails
@@ -109,11 +118,13 @@ function App() {
             onGoBack={handleGoBack}
             toggleFavorite={toggleFavorite}
             favoriteEpisodes={favoriteEpisodes}
+            playEpisode={playEpisode}
           />
         ) : (
           <ShowList onShowClick={handleShowClick} />
         )}
       </div>
+      <Player />
       <Footer />
     </div>
   );
