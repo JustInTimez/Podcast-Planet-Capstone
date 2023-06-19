@@ -11,13 +11,13 @@ export default function ShowDetails({
   toggleFavorite,
   favoriteEpisodes,
 }) {
+  // States
   const [showData, setShowData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [selectedSeason, setSelectedSeason] = useState(1);
   const [selectedSeasonData, setSelectedSeasonData] = useState(null);
 
-  // console.log(showData)
-
+  // Fetch a specific show's data from the API, and show on DOM
   useEffect(() => {
     const fetchShowDetails = async () => {
       try {
@@ -38,6 +38,7 @@ export default function ShowDetails({
     fetchShowDetails();
   }, [show]);
 
+  // Once show's data available, find the seasons of that show
   useEffect(() => {
     if (showData) {
       const seasonData = showData.seasons.find(
@@ -47,6 +48,7 @@ export default function ShowDetails({
     }
   }, [selectedSeason, showData]);
 
+  // Handles the selection of a season's data in a show, and sets it to state
   const handleSelectSeason = (seasonNumber) => {
     setSelectedSeason(seasonNumber);
     if (showData) {
@@ -54,44 +56,20 @@ export default function ShowDetails({
         (season) => season.season === seasonNumber
       );
       setSelectedSeasonData({ ...seasonData });
-      // if (seasonData) {
-      //   const updatedEpisodes = seasonData.episodes.map((episode) => {
-
-      //     const favorited = favoriteEpisodes.some(
-      //       (favEpisodeKey) => favEpisodeKey === compositeKey
-      //     );
-      //     return { ...episode, favorited };
-      //   });
-      //   // console.log(updatedEpisodes)
-      // }
     }
   };
 
-  const handlePlayEpisode = (episode) => {
-    const { seasons } = showData;
-    let selectedEpisode;
-
-    for (const season of seasons) {
-      const { episodes } = season;
-      selectedEpisode = episodes.find((ep) => ep.episode === episode.episode);
-
-      if (selectedEpisode) {
-        break;
-      }
-    }
-
-    if (selectedEpisode) {
-      playEpisode(episode);
-    }
-  };
-
+  // Checks if a episode is in favorites, by using the composite key made from show ID, season number and episode number
+  // Used to determine if the heart icon should be filled or not
   const episodeIsFavorited = (episode) => {
     const compositeKey = `${showData.id}-${selectedSeasonData.season}-${episode.episode}`;
-    return favoriteEpisodes.some(
-      (favEpisodeKey) => favEpisodeKey === compositeKey
+    const episodeInFavorites = favoriteEpisodes.some(
+      (favEpisode) => favEpisode.compositeKey === compositeKey
     );
+    return episodeInFavorites;
   };
 
+  // Show loading spinner while loading shows data
   if (!showData) {
     return (
       <div className="loading-spinner">
@@ -100,8 +78,10 @@ export default function ShowDetails({
     );
   }
 
+  // Destructure the field data of a show
   const { title, description, seasons } = showData;
 
+  // Gets the season image and appends to DOM when selecting a season
   const selectedSeasonImage =
     seasons.find((season) => season.season === selectedSeason)?.image ||
     showData.image;
@@ -143,22 +123,14 @@ export default function ShowDetails({
                       <AiFillHeart
                         className="favourite-icon"
                         onClick={() =>
-                          toggleFavorite(
-                            episode,
-                            selectedSeasonData,
-                            showData
-                          )
+                          toggleFavorite(episode, selectedSeasonData, showData)
                         }
                       />
                     ) : (
                       <AiOutlineHeart
                         className="favourite-icon"
                         onClick={() =>
-                          toggleFavorite(
-                            episode,
-                            selectedSeasonData,
-                            showData
-                          )
+                          toggleFavorite(episode, selectedSeasonData, showData)
                         }
                       />
                     )}

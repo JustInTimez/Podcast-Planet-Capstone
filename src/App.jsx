@@ -13,26 +13,24 @@ function App() {
   // ==============================================================================
   //                                NAVIGATION START
   // ==============================================================================
+
   // States
   const [selectedShowId, setSelectedShowId] = useState(null);
-  // const [selectedEpisode, setSelectedEpisode] = useState(null);
 
-  // const handleEpisodeSelect = (episode) => {
-  //   setSelectedEpisode(episode);
-  // };
-
+  // Handles clicking on a show to view it's details
   const handleShowClick = async (showId) => {
     setSelectedShowId(showId);
   };
 
+  // Handles the back button to return from show's view
   const handleGoBack = () => {
     setSelectedShowId(null);
   };
 
+  // Handles the favorites button click in the Navbar
   const handleFavoritesNavigation = () => {
     setViewingFavorites((prevState) => !prevState);
     setSelectedShowId(null);
-    setSelectedEpisode(null);
   };
   // ==============================================================================
   //                                NAVIGATION END
@@ -41,47 +39,53 @@ function App() {
   // ==============================================================================
   //                                FAVOURITES START
   // ==============================================================================
+
+  // States
   const [viewingFavorites, setViewingFavorites] = useState(false);
   const [favoriteEpisodes, setFavoriteEpisodes] = useState(() => {
     const storedFavorites = localStorage.getItem("favoriteEpisodes");
     return storedFavorites ? JSON.parse(storedFavorites) : [];
   });
 
+  // Toggles the favorite status of an episode
   const toggleFavorite = (episode, season, show) => {
     const compositeKey = `${show.id}-${season.season}-${episode.episode}`;
-    
+
     if (
-      favoriteEpisodes.some(
-        (favEpisodeKey) => favEpisodeKey === compositeKey
-      )
+      favoriteEpisodes.some((favEpisode) => favEpisode.compositeKey === compositeKey)
     ) {
       removeFavorite(compositeKey);
     } else {
       addFavorite(compositeKey);
     }
-
-    console.log(favoriteEpisodes)
   };
 
+  /* Adds selected episode to favorites
+   * Composite key created by combining the show's ID, with the seasons number and episode number
+   * Sets React state as well as localStorage
+   */
   const addFavorite = (compositeKey) => {
-    const updatedFavorites = [...favoriteEpisodes, compositeKey];
+    const timeStamp = new Date;
+    const favorite = {
+      compositeKey: compositeKey,
+      timeStamp: timeStamp
+    };
+    const updatedFavorites = [...favoriteEpisodes, favorite];
     setFavoriteEpisodes(updatedFavorites);
-    localStorage.setItem(
-      "favoriteEpisodes",
-      JSON.stringify(updatedFavorites)
-    );
-  }
-  
+    localStorage.setItem("favoriteEpisodes", JSON.stringify(updatedFavorites));
+  };
+
+  /* Removes selected episode to favorites
+   * Composite key created by combining the show's ID, with the seasons number and episode number
+   * Sets React state as well as localStorage
+   */
   const removeFavorite = (compositeKey) => {
     const updatedFavorites = favoriteEpisodes.filter(
-      (favEpisodeKey) => favEpisodeKey !== compositeKey
+      (favEpisode) => favEpisode.compositeKey !== compositeKey
     );
     setFavoriteEpisodes(updatedFavorites);
-    localStorage.setItem(
-      "favoriteEpisodes",
-      JSON.stringify(updatedFavorites)
-    );
-  }
+    localStorage.setItem("favoriteEpisodes", JSON.stringify(updatedFavorites));
+  };
 
   // ==============================================================================
   //                                FAVOURITES END

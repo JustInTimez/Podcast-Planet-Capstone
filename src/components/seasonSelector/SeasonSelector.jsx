@@ -1,6 +1,8 @@
 import React from "react";
 import "./SeasonSelector.css";
 
+
+// Pass and use season data of a specific show to display and update on DOM
 const SeasonSelector = ({ seasons, selectedSeason, onSelectSeason }) => {
   return (
     <div className="season-selector">

@@ -1,20 +1,30 @@
 import React, { useEffect, useState } from "react";
+import MoonLoader from "react-spinners/MoonLoader";
+import { format } from "date-fns";
 import { AiFillHeart } from "react-icons/ai";
 
 const Favourites = ({ favoriteEpisodeIDs, toggleFavorite }) => {
-
+  // State
   const [favoriteEpisodes, setFavoriteEpisodes] = useState([]);
+  // State for the episode sorting
+  const [sortBy, setSortBy] = useState("");
+  // State for typed filtering
+  const [filterValue, setFilterValue] = useState("");
 
+  // Fetch favorite episodes data from the composite key that is saved in favorites. Made from show ID, season number and episode number
   useEffect(() => {
     const fetchFavoriteEpisodes = async () => {
       const episodes = [];
 
-      for (let episodeKey of favoriteEpisodeIDs) {
-        const episodeIDs = episodeKey.split("-");
+      // Loop through composite keys in favorites array
+      for (let episode of favoriteEpisodeIDs) {
+        // Break up composite key into individual parts
+        const episodeIDs = episode.compositeKey.split("-");
         const showID = episodeIDs[0];
         const seasonID = episodeIDs[1];
         const episodeID = episodeIDs[2];
 
+        // Fetch and store show data in state
         try {
           const response = await fetch(
             `https://podcast-api.netlify.app/id/${showID}`
@@ -24,13 +34,15 @@ const Favourites = ({ favoriteEpisodeIDs, toggleFavorite }) => {
             (season) => season.season === parseInt(seasonID)
           );
 
+          // Build object for favorite data
           const favObject = {
-            key: episodeKey,
+            key: episode.compositeKey,
             show: data,
             season: seasonData,
             episode: seasonData.episodes.find(
               (episode) => episode.episode === parseInt(episodeID)
             ),
+            dateAdded: episode.timeStamp
           };
 
           episodes.push(favObject);
@@ -41,27 +53,99 @@ const Favourites = ({ favoriteEpisodeIDs, toggleFavorite }) => {
           );
         }
       }
-
       setFavoriteEpisodes(episodes);
     };
 
     fetchFavoriteEpisodes();
   }, [favoriteEpisodeIDs]);
 
+  // Format the display of Updated field data of a show into a human-readable format
+  const formatDate = (dateString) => {
+    const date = new Date(dateString);
+    return format(date, "d MMMM, yyyy");
+  };
+
+  // Sorting logic
+  const applySorting = () => {
+    let sortedEpisodes = [...favoriteEpisodes];
+
+    if (sortBy === "titleAsc") {
+      sortedEpisodes.sort((a, b) =>
+        a.episode.title.localeCompare(b.episode.title)
+      );
+    } else if (sortBy === "titleDesc") {
+      sortedEpisodes.sort((a, b) =>
+        b.episode.title.localeCompare(a.episode.title)
+      );
+    } else if (sortBy === "recent") {
+      sortedEpisodes.sort(
+        (a, b) => new Date(b.show.updated) - new Date(a.show.updated)
+      );
+    } else if (sortBy === "leastRecent") {
+      sortedEpisodes.sort(
+        (a, b) => new Date(a.show.updated) - new Date(b.show.updated)
+      );
+    }
+
+    setFavoriteEpisodes(sortedEpisodes);
+  };
+
+  useEffect(() => {
+    applySorting();
+  }, [sortBy]);
+
+  // NB: WORK IN SPINNER INTO LOADING OF FAVORITES
+  if (!favoriteEpisodes) {
+    return (
+      <div className="loading-spinner">
+        <MoonLoader color="#1b7ae4" loading={loading} size={60} />
+      </div>
+    );
+  }
+
   return (
     <div>
       <h2>Favorite Episodes</h2>
-      {favoriteEpisodes.map((favorite) => (
-        <div key={favorite.key}>
-          {console.log(favorite)}
-          <h3>{favorite.episode.title}</h3>
-          <p>{favorite.episode.description}</p>
-          {/* Add any other relevant information here */}
-          <button onClick={() => toggleFavorite(favorite.episode, favorite.season, favorite.show)}>
-            <AiFillHeart />
-          </button>
-        </div>
-      ))}
+      <div className="sorting-options">
+        <label htmlFor="sortBy">Sort By:</label>
+        <select
+          id="sortBy"
+          value={sortBy}
+          onChange={(e) => setSortBy(e.target.value)}
+        >
+          <option value="">Choose:</option>
+          <option value="titleAsc">Title (A-Z)</option>
+          <option value="titleDesc">Title (Z-A)</option>
+          <option value="recent">Most Recent Updated</option>
+          <option value="leastRecent">Least Recent Updated</option>
+        </select>
+        Search:
+        <input
+          type="text"
+          value={filterValue}
+          onChange={(e) => setFilterValue(e.target.value)}
+          placeholder="Filter by title"
+        />
+      </div>
+      {favoriteEpisodes &&
+        favoriteEpisodes.map((favorite) => (
+          <div key={favorite.key}>
+            <h2>{favorite.episode.title}</h2>
+            <h3>{favorite.show.title}</h3>
+            <h4>Season: {favorite.season.season}</h4>
+            <p>{favorite.episode.description}</p>
+            <p>Added to Favs: {formatDate(favorite.dateAdded)}</p>
+            <p>Updated: {formatDate(favorite.show.updated)}</p>
+            {/* Add any other relevant information here */}
+            <button
+              onClick={() =>
+                toggleFavorite(favorite.episode, favorite.season, favorite.show)
+              }
+            >
+              <AiFillHeart />
+            </button>
+          </div>
+        ))}
     </div>
   );
 };

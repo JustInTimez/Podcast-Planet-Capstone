@@ -17,6 +17,25 @@ const Player = () => {
     }
   }, [selectedEpisode]);
 
+  // WIP: Handles the playing of the audio for a episode in a season of a show
+  const handlePlayEpisode = (episode) => {
+    const { seasons } = showData;
+    let selectedEpisode;
+
+    for (const season of seasons) {
+      const { episodes } = season;
+      selectedEpisode = episodes.find((ep) => ep.episode === episode.episode);
+
+      if (selectedEpisode) {
+        break;
+      }
+    }
+
+    if (selectedEpisode) {
+      playEpisode(episode);
+    }
+  };
+
   return (
     <div className="player-container">
       <div className="player">
