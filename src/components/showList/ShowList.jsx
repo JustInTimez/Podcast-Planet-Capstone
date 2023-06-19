@@ -4,6 +4,7 @@ import { format } from "date-fns";
 import "./ShowList.css";
 
 export default function ShowList({ onShowClick }) {
+  // States
   const [shows, setShows] = useState([]);
   const [loading, setLoading] = useState(true);
   /*
@@ -15,13 +16,12 @@ export default function ShowList({ onShowClick }) {
 
   // State for initial number of Shows displayed on page
   const [visibleShows, setVisibleShows] = useState(8);
-  // State to control display of Show More button
-  const [showLoadMore, setShowLoadMore] = useState(true);
   // State for the selected sorting option
   const [sortBy, setSortBy] = useState("");
   // State for typed filtering
   const [filterValue, setFilterValue] = useState("");
 
+  // Fetch the show's data from the API, and show on DOM
   useEffect(() => {
     const fetchShows = async () => {
       try {
@@ -40,7 +40,7 @@ export default function ShowList({ onShowClick }) {
     fetchShows();
   }, []);
 
-  // Sorting
+  // Sorting logic
   const applySorting = () => {
     let sortedShows = [...shows];
 
@@ -62,6 +62,7 @@ export default function ShowList({ onShowClick }) {
     setVisibleShows(8); // Reset visible shows when sorting changes
   }, [sortBy]);
 
+  // Show loading spinner while loading shows data
   if (loading) {
     return (
       <div className="loading-spinner">
@@ -70,10 +71,12 @@ export default function ShowList({ onShowClick }) {
     );
   }
 
+  // Handles the click to view a specific show's details
   const handleShowClick = (showId) => {
     onShowClick(showId);
   };
 
+  // Handles the loading of more shows when the load more button is clicked
   const handleLoadMore = async () => {
     setLoadingMore(true);
 
@@ -94,6 +97,7 @@ export default function ShowList({ onShowClick }) {
     setLoadingMore(false);
   };
 
+  // Shorten and make neat on the display of description data of a show
   const clampText = (text, maxLength) => {
     if (text.length <= maxLength) {
       return text;
@@ -101,6 +105,7 @@ export default function ShowList({ onShowClick }) {
     return text.slice(0, maxLength) + "...";
   };
 
+  // Format the display of Updated field data of a show into a human-readable format
   const formatDate = (dateString) => {
     const date = new Date(dateString);
     return format(date, "d MMMM, yyyy");
@@ -119,6 +124,7 @@ export default function ShowList({ onShowClick }) {
     9: "Kids and Family",
   };
 
+  // Map over and pull the genre title(s) of a show
   const getGenreTitles = (genreIds) => {
     return genreIds.map((genreId) => (
       <span className="genre-pill" key={genreId}>
@@ -136,7 +142,7 @@ export default function ShowList({ onShowClick }) {
           value={sortBy}
           onChange={(e) => setSortBy(e.target.value)}
         >
-          <option value="">None</option>
+          <option value="">Choose:</option>
           <option value="titleAsc">Title (A-Z)</option>
           <option value="titleDesc">Title (Z-A)</option>
           <option value="recent">Most Recent Updated</option>
@@ -188,7 +194,6 @@ export default function ShowList({ onShowClick }) {
           <MoonLoader color="#1b7ae4" loading={true} size={60} />
         </div>
       ) : (
-        showLoadMore &&
         visibleShows < shows.length && (
           <div className="load-more-container">
             <button className="load-more-button" onClick={handleLoadMore}>

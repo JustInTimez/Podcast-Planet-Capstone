@@ -28,6 +28,7 @@ html, body, #root {
 
 .content {
   max-width: 1280px;
+  flex: auto;
 }
 
 /* LOADING SPINNER */
