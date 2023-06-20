@@ -106,7 +106,7 @@ const Favourites = ({ favoriteEpisodeIDs, toggleFavorite, playEpisode }) => {
   return (
     <div>
       <h2>Favorite Episodes</h2>
-      <h1>add conditional for if empty, show text that says so</h1>
+      <h1>{favoriteEpisodes.length === 0 ? "No favorite episodes found." : null}</h1>
       <div className="sorting-options">
         <label htmlFor="sortBy">Sort By:</label>
         <select
@@ -123,26 +123,25 @@ const Favourites = ({ favoriteEpisodeIDs, toggleFavorite, playEpisode }) => {
       </div>
       {favoriteEpisodes &&
         favoriteEpisodes.map((favorite) => (
-          <div key={favorite.key}>
-            <h2>{favorite.episode.title}</h2>
-            <h3>{favorite.show.title}</h3>
-            <h4>Season: {favorite.season.season}</h4>
-            <p>{favorite.episode.description}</p>
-            <p>Added to Favs: {formatDate(favorite.dateAdded)}</p>
-            <p>Updated: {formatDate(favorite.show.updated)}</p>
-            {/* Add any other relevant information here */}
-            <button
-              className="play-button"
-              onClick={() => playEpisode(favorite.episode)}
-            >
-              Play
-            </button>
+          <div key={favorite.key} className="episode-item">
+            <h5 className="episode-title">{favorite.episode.title}</h5>
+            <h6 className="show-title">{favorite.show.title}</h6>
+            <h6 className="selected-season-title">Season: {favorite.season.season}</h6>
             <button
               onClick={() =>
                 toggleFavorite(favorite.episode, favorite.season, favorite.show)
               }
             >
               <AiFillHeart />
+            </button>
+            <p className="episode-description">{favorite.episode.description}</p>
+            <p>Added to Favs: {formatDate(favorite.dateAdded)}</p>
+            <p>Updated: {formatDate(favorite.show.updated)}</p>
+            <button
+              className="play-button"
+              onClick={() => playEpisode(favorite.episode)}
+            >
+              Play
             </button>
           </div>
         ))}
