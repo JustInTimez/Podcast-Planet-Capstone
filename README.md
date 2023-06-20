@@ -25,7 +25,7 @@ Throughout the project, these technologies and concepts are employed to enhance 
 
 ## OG Meta Tags
 ![Podcast Planet OG Meta Image](./public/images/og/podcast-planet-og-image.jpg)
-My OG meta tags used in this project were tested using Meta Tags.IO. A useful tool for generating and previewing Open Graph (OG) meta tags that improve how your website appears when shared on social media platforms.
+My OG meta tags used in this project were tested using [https://metatags.io/](https://metatags.io/). A useful tool for generating and previewing Open Graph (OG) meta tags that improve how your website appears when shared on social media platforms.
 
 ## Setup & How to use
 
