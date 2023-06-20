@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import Carousel from "../carousel/Carousel";
 import MoonLoader from "react-spinners/MoonLoader";
 import { format } from "date-fns";
 import "./ShowList.css";
@@ -135,6 +136,15 @@ export default function ShowList({ onShowClick }) {
 
   return (
     <div className="show-list-container">
+      <div>You may be interested in...</div>
+      <Carousel
+        shows={shows
+          .filter((show) =>
+            show.title.toLowerCase().includes(filterValue.toLowerCase())
+          )
+          .slice(0, visibleShows)}
+        onShowClick={onShowClick}
+      />
       <div className="sorting-options">
         <label htmlFor="sortBy">Sort By:</label>
         <select

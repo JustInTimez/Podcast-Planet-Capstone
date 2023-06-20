@@ -20,12 +20,14 @@ const Player = () => {
   return (
     <div className="player-container">
       <div className="player">
-        <h2>{selectedEpisode.title}</h2>
-        <p>{selectedEpisode.description}</p>
+        <div className="info-container">
+          <div className="title">{selectedEpisode.title}</div>
+          <div className="description">{selectedEpisode.description}</div>
+        </div>
         <audio id="audioPlayer" ref={audioRef} controls />
       </div>
     </div>
-  );
+  );  
 };
 
 export default Player;

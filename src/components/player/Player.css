@@ -12,10 +12,31 @@
     max-width: 600px;
     margin: 0 auto;
     display: flex;
-    flex-direction: column;
     align-items: center;
 }
 
-.player audio {
+.info-container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding-right: 20px;
+}
+
+.title {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.description {
+    font-size: 14px;
+    max-width: 300px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+audio {
     width: 100%;
+    margin-top: 10px;
 }
