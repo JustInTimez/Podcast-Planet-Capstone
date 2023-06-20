@@ -71,7 +71,7 @@ Each completed story that is verified by my lecturer will result in me receiving
 
 ---
 
-- [X] Audio player is always visible so that user can listen to episodes while I browse
+- [x] Audio player is always visible so that user can listen to episodes while I browse
 - [ ] User receives a notification that confirms they want to close the page when audio is playing
 - [ ] App remembers what shows and episode user listened to last when returning to the platform
 - [ ] Automatically filters shows by a genre if the genre label is clicked on
@@ -82,7 +82,7 @@ Each completed story that is verified by my lecturer will result in me receiving
 
 ---
 
-- [ ] User is presented with a sliding carousel of possible shows they might be interested in on the landing page
+- [x] User is presented with a sliding carousel of possible shows they might be interested in on the landing page
 - [ ] User is able to log in via [https://app.supabase.com](https://app.supabase.com/) authentication
 - [ ] User favourites are stored in [https://app.supabase.com](https://app.supabase.com/) database
 - [ ] User favourites are automatically synced when logged in, ensuring that they share favourites between devices
