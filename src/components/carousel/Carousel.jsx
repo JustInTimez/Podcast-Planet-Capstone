@@ -2,7 +2,7 @@ import React from "react";
 import Slider from "react-slick";
 import "./Carousel.css";
 
-export default function Carousel({ shows }) {
+export default function Carousel({ shows, onShowClick }) {
   const carouselSettings = {
     dots: true,
     infinite: true,
@@ -22,7 +22,7 @@ export default function Carousel({ shows }) {
   return (
     <Slider {...carouselSettings} className="show-carousel">
       {shows.map((show) => (
-        <div key={show.id} className="carousel-slide">
+        <div key={show.id} className="carousel-slide" onClick={() => onShowClick(show.id)}>
           <img className="carousel-image" src={show.image} alt={show.title} />
           <div className="show-details">
             <h3 className="show-title">{show.title}</h3>
