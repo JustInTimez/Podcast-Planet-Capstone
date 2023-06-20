@@ -88,6 +88,9 @@ export default function ShowDetails({
 
   return (
     <div className="single-show-details">
+      <button className="go-back-btn" onClick={onGoBack}>
+        Go Back
+      </button>
       {showData && (
         <div>
           <h3 className="show-title">{title}</h3>

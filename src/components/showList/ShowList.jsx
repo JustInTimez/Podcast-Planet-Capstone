@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import Carousel from "../carousel/Carousel";
 import MoonLoader from "react-spinners/MoonLoader";
 import { format } from "date-fns";
 import "./ShowList.css";
@@ -20,6 +21,8 @@ export default function ShowList({ onShowClick }) {
   const [sortBy, setSortBy] = useState("");
   // State for typed filtering
   const [filterValue, setFilterValue] = useState("");
+  // State for Carousel shows
+  const [carouselShows, setCarouselShows] = useState([]);
 
   // Fetch the show's data from the API, and show on DOM
   useEffect(() => {
@@ -29,6 +32,8 @@ export default function ShowList({ onShowClick }) {
         const data = await response.json();
         setShows(data);
         setLoading(false);
+        // Initialize carouselShows with initial data
+        setCarouselShows(data.slice(0, visibleShows));
       } catch (error) {
         console.error(
           "Issue fetching shows data. Please refresh and try again.",
@@ -39,9 +44,23 @@ export default function ShowList({ onShowClick }) {
 
     fetchShows();
   }, []);
+  
 
-  // Sorting logic
-  const applySorting = () => {
+  useEffect(() => {
+    const filteredShows = shows.filter(
+      (show) =>
+        show.title.toLowerCase().includes(filterValue.toLowerCase()) &&
+        !carouselShows.find((carouselShow) => carouselShow.id === show.id)
+    );
+  
+    // Shuffle the filtered shows array
+    const shuffledShows = filteredShows.sort(() => 0.5 - Math.random());
+  
+    setCarouselShows(shuffledShows.slice(0, visibleShows));
+  }, [shows, filterValue, visibleShows]);
+
+  // Apply sorting to the shows array
+  useEffect(() => {
     let sortedShows = [...shows];
 
     if (sortBy === "titleAsc") {
@@ -55,11 +74,6 @@ export default function ShowList({ onShowClick }) {
     }
 
     setShows(sortedShows);
-  };
-
-  useEffect(() => {
-    applySorting();
-    setVisibleShows(8); // Reset visible shows when sorting changes
   }, [sortBy]);
 
   // Show loading spinner while loading shows data
@@ -74,7 +88,13 @@ export default function ShowList({ onShowClick }) {
   // Handles the click to view a specific show's details
   const handleShowClick = (showId) => {
     onShowClick(showId);
+
+    // Filter out the clicked show from carouselShows
+    setCarouselShows((prevCarouselShows) =>
+      prevCarouselShows.filter((show) => show.id !== showId)
+    );
   };
+
 
   // Handles the loading of more shows when the load more button is clicked
   const handleLoadMore = async () => {
@@ -135,6 +155,8 @@ export default function ShowList({ onShowClick }) {
 
   return (
     <div className="show-list-container">
+      <div>You may be interested in...</div>
+      <Carousel shows={carouselShows} onShowClick={onShowClick} />
       <div className="sorting-options">
         <label htmlFor="sortBy">Sort By:</label>
         <select
@@ -178,7 +200,9 @@ export default function ShowList({ onShowClick }) {
                 <div className="genre-container">
                   <span className="genre-label">Genres</span>
                   <div className="genre-list">
-                    <p className="show-genres">{getGenreTitles(show.genres)}</p>
+                    <p className="show-genres">
+                      {getGenreTitles(show.genres)}
+                    </p>
                   </div>
                 </div>
                 <p className="last-updated">
