@@ -72,7 +72,7 @@ Each completed story that is verified by my lecturer will result in me receiving
 ---
 
 - [x] Audio player is always visible so that user can listen to episodes while I browse
-- [ ] User receives a notification that confirms they want to close the page when audio is playing
+- [x] User receives a notification that confirms they want to close the page when audio is playing
 - [ ] App remembers what shows and episode user listened to last when returning to the platform
 - [ ] Automatically filters shows by a genre if the genre label is clicked on
 - [ ] App remembers and shows what episodes user listened all the way through
