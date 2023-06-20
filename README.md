@@ -1,4 +1,4 @@
-<img src="./public/images/podcast-planet-logo-planetglow.png" alt="Podcast Planet Logo" width="300" height="200">
+<img src="./public/images/podcast-planet-logo-planetglow.png" alt="Podcast Planet Logo" width="300" height="157">
 # Podcast Planet: Capstone Project
 
 This podcast web application enables users to explore a variety of shows and episodes organized by seasons. Users can easily navigate between seasons, listen to episodes, and mark favorites. The app provides preview images, genres, and last updated information for discovering new content. Features include arranging shows and favorites, filtering by title, and a persistent audio player.
