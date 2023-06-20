@@ -1,12 +1,76 @@
+![Podcast Planet Logo](./public/images/podcast-planet-logo-planetglow.png)
 # Podcast Planet: Capstone Project
 
-Fetch and use Podcast information from API. Handle/complete as many User Stories as possible. Built using Vite and React JSX Components.
+This podcast web application enables users to explore a variety of shows and episodes organized by seasons. Users can easily navigate between seasons, listen to episodes, and mark favorites. The app provides preview images, genres, and last updated information for discovering new content. Features include arranging shows and favorites, filtering by title, and a persistent audio player.
 
+## Features
+
+- [x] Global podcast streaming with placeholder music.
+- [x] Detailed information display for each podcast.
+- [x] Favorite functionality to easily access and manage your preferred podcasts.
+- [x] Additional smaller features to enhance usability and user experience.
+
+## Technologies and Hooks Used
+
+This project incorporates a variety of technologies and concepts to enhance its functionality and user experience:
+
+- React: JavaScript library for building user interfaces.
+- Redux: A state management library that enables efficient management of the audio player state.
+- React Slick: A popular carousel component for React, utilized to create a sliding carousel of recommended shows on the landing page.
+- useState: A React Hook that allows for state management within functional components, employed for managing various component-level states.
+- useEffect: Another React Hook used to perform side effects in functional components, enabling actions such as fetching data, handling subscriptions, and more.
+- useRef: A React Hook used to reference elements or values, enabling efficient manipulation or access to those references.
+
+Throughout the project, these technologies and concepts are employed to enhance the user interface, achieve efficient state management of the audio player using Redux, create an interactive sliding carousel using React Slick, and leverage the power of React Hooks such as useState, useEffect, and useRef for managing component-level states, performing side effects, and accessing references.
+
+## OG Meta Tags
+![Podcast Planet OG Meta Image](./public/images/og/podcast-planet-og-image.jpg)
+My OG meta tags used in this project were tested using Meta Tags.IO. A useful tool for generating and previewing Open Graph (OG) meta tags that improve how your website appears when shared on social media platforms.
+
+## Setup & How to use
+
+1. Clone the repo with:
+   `git clone <repository-url>`
+
+2. Navigate to the project directory:
+   `cd podcast-project`
+
+3. Install the dependencies with npm or yarn:
+   `npm install`
+   OR
+   `yarn install`
+
+4. Start the dev server:
+   `npm run dev`
+   OR
+   `yarn dev`
+
+Click on the `http://localhost` link in your terminal after successful startup to see the running app in your browser.
+Make sure you have Node.js installed on your machine.
+Note: This project uses **Vite** as the build tool, which provides a fast development server and optimized builds.
+<br>
+Alternatively, see the App live and online: [https://capstone-podcast-project.netlify.app/](https://capstone-podcast-project.netlify.app)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--
 ## User Stories
 
 **There is a total of 50 possible stories below that determine my final grade/marks.**
 
-Each completed story that is verified by my lecturer will result in me receiving 2% towards my final mark. Completing all 50 will result in a mark of 100%. Note that user stories can be completed in any order.
+Each completed story that is verified by my lecturer will result in me receiving 2% towards my final mark. Completing all 50 will result in a mark of 100%.
 
 ---
 
@@ -86,4 +150,4 @@ Each completed story that is verified by my lecturer will result in me receiving
 - [ ] User is able to log in via [https://app.supabase.com](https://app.supabase.com/) authentication
 - [ ] User favourites are stored in [https://app.supabase.com](https://app.supabase.com/) database
 - [ ] User favourites are automatically synced when logged in, ensuring that they share favourites between devices
-- [ ] Users are able to share their favourites as a publicly accessible URL
+- [ ] Users are able to share their favourites as a publicly accessible URL -->
