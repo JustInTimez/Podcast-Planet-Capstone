@@ -1,4 +1,4 @@
-![Podcast Planet Logo](./public/images/podcast-planet-logo-planetglow.png)
+<img src="./public/images/podcast-planet-logo-planetglow.png" alt="Podcast Planet Logo" width="300" height="200">
 # Podcast Planet: Capstone Project
 
 This podcast web application enables users to explore a variety of shows and episodes organized by seasons. Users can easily navigate between seasons, listen to episodes, and mark favorites. The app provides preview images, genres, and last updated information for discovering new content. Features include arranging shows and favorites, filtering by title, and a persistent audio player.
@@ -25,7 +25,6 @@ Throughout the project, these technologies and concepts are employed to enhance 
 
 ## OG Meta Tags
 ![Podcast Planet OG Meta Image](./public/images/og/podcast-planet-og-image.jpg)
-<img src="./public/images/og/podcast-planet-og-image.jpg" alt="Podcast Planet OG Meta Image" width="300" height="200">
 My OG meta tags used in this project were tested using Meta Tags.IO. A useful tool for generating and previewing Open Graph (OG) meta tags that improve how your website appears when shared on social media platforms.
 
 ## Setup & How to use
