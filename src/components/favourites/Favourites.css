@@ -1,3 +1,19 @@
+.sorting-fav-options {
+    margin: 15px;
+}
+
+.sorting-fav-options label {
+    color: #fff;
+}
+
+.sorting-fav-options select {
+    padding: 5px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    background-color: #333;
+    color: #fff;
+}
+
 .favorites-container {
     display: flex;
     flex-direction: column;

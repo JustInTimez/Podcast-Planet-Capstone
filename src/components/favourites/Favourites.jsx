@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import MoonLoader from "react-spinners/MoonLoader";
 import { format } from "date-fns";
 import { AiFillHeart } from "react-icons/ai";
+import './Favourites.css';
 
 const Favourites = ({ favoriteEpisodeIDs, toggleFavorite, playEpisode }) => {
   // State
@@ -107,7 +108,7 @@ const Favourites = ({ favoriteEpisodeIDs, toggleFavorite, playEpisode }) => {
     <div>
       <h2>Favorite Episodes</h2>
       <h1>{favoriteEpisodes.length === 0 ? "No favorite episodes found." : null}</h1>
-      <div className="sorting-options">
+      <div className="sorting-fav-options">
         <label htmlFor="sortBy">Sort By:</label>
         <select
           id="sortBy"

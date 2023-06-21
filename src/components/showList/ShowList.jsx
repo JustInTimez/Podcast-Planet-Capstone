@@ -155,8 +155,9 @@ export default function ShowList({ onShowClick }) {
 
   return (
     <div className="show-list-container">
-      <div>You may be interested in...</div>
+      <div className="interested-in-text">You may be interested in...</div>
       <Carousel shows={carouselShows} onShowClick={onShowClick} />
+      <div className="available-shows-text">Check out our available shows!</div>
       <div className="sorting-options">
         <label htmlFor="sortBy">Sort By:</label>
         <select
