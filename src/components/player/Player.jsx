@@ -32,7 +32,7 @@ const Player = () => {
     const handleUnload = (event) => {
       if (audioRef.current && audioRef.current.currentTime > 0) {
         event.preventDefault();
-        event.returnValue = ""; // Chrome requires returnValue to be set
+        event.returnValue = "";
       }
     };
 

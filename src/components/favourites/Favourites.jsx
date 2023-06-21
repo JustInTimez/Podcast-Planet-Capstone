@@ -95,7 +95,7 @@ const Favourites = ({ favoriteEpisodeIDs, toggleFavorite, playEpisode }) => {
     applySorting();
   }, [sortBy]);
 
-  // NB: WORK IN SPINNER INTO LOADING OF FAVORITES
+  // Loading Spinner
   if (!favoriteEpisodes) {
     return (
       <div className="loading-spinner">
