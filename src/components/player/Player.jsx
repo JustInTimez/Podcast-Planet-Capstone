@@ -1,11 +1,10 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef } from "react";
 import { useSelector } from "react-redux";
 import "./Player.css";
 
 const Player = () => {
   const selectedEpisode = useSelector((state) => state.player.selectedEpisode);
   const audioRef = useRef(null);
-  const [confirmClose, setConfirmClose] = useState(false);
 
   useEffect(() => {
     if (selectedEpisode) {
@@ -19,7 +18,6 @@ const Player = () => {
       if (audioRef.current && audioRef.current.currentTime > 0) {
         event.preventDefault();
         event.returnValue = ""; // Chrome requires returnValue to be set
-        setConfirmClose(true);
       }
     };
 
@@ -30,9 +28,20 @@ const Player = () => {
     };
   }, []);
 
-  const handleConfirmClose = () => {
-    setConfirmClose(false);
-  };
+  useEffect(() => {
+    const handleUnload = (event) => {
+      if (audioRef.current && audioRef.current.currentTime > 0) {
+        event.preventDefault();
+        event.returnValue = ""; // Chrome requires returnValue to be set
+      }
+    };
+
+    window.addEventListener("unload", handleUnload);
+
+    return () => {
+      window.removeEventListener("unload", handleUnload);
+    };
+  }, []);
 
   if (!selectedEpisode) {
     return null; // Return null if there is no selected episode
@@ -40,13 +49,6 @@ const Player = () => {
 
   return (
     <div className="player-container">
-      {confirmClose && (
-        <div className="confirm-close">
-          <p>Are you sure you want to close the page?</p>
-          <button onClick={handleConfirmClose}>Cancel</button>
-          <button onClick={() => window.close()}>Confirm</button>
-        </div>
-      )}
       <div className="player">
         <div className="info-container">
           <div className="title">{selectedEpisode.title}</div>

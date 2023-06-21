@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import MoonLoader from "react-spinners/MoonLoader";
 import { format } from "date-fns";
 import { AiFillHeart } from "react-icons/ai";
-import './Favourites.css';
+import "./Favourites.css";
 
 const Favourites = ({ favoriteEpisodeIDs, toggleFavorite, playEpisode }) => {
   // State
@@ -107,7 +107,9 @@ const Favourites = ({ favoriteEpisodeIDs, toggleFavorite, playEpisode }) => {
   return (
     <div>
       <h2>Favorite Episodes</h2>
-      <h1>{favoriteEpisodes.length === 0 ? "No favorite episodes found." : null}</h1>
+      <h1>
+        {favoriteEpisodes.length === 0 ? "No favorite episodes found." : null}
+      </h1>
       <div className="sorting-fav-options">
         <label htmlFor="sortBy">Sort By:</label>
         <select
@@ -122,30 +124,40 @@ const Favourites = ({ favoriteEpisodeIDs, toggleFavorite, playEpisode }) => {
           <option value="leastRecent">Least Recent Updated</option>
         </select>
       </div>
-      {favoriteEpisodes &&
-        favoriteEpisodes.map((favorite) => (
-          <div key={favorite.key} className="episode-item">
-            <h5 className="episode-title">{favorite.episode.title}</h5>
-            <h6 className="show-title">{favorite.show.title}</h6>
-            <h6 className="selected-season-title">Season: {favorite.season.season}</h6>
-            <button
-              onClick={() =>
-                toggleFavorite(favorite.episode, favorite.season, favorite.show)
-              }
-            >
-              <AiFillHeart />
-            </button>
-            <p className="episode-description">{favorite.episode.description}</p>
-            <p>Added to Favs: {formatDate(favorite.dateAdded)}</p>
-            <p>Updated: {formatDate(favorite.show.updated)}</p>
-            <button
-              className="play-button"
-              onClick={() => playEpisode(favorite.episode)}
-            >
-              Play
-            </button>
-          </div>
-        ))}
+      <ul className="episode-list">
+        {favoriteEpisodes &&
+          favoriteEpisodes.map((favorite) => (
+            <div key={favorite.key} className="episode-item">
+              <h5 className="episode-fav-title">{favorite.episode.title}</h5>
+              <h6 className="show-title">{favorite.show.title}</h6>
+              <h6 className="selected-season-title">
+                Season: {favorite.season.season}
+              </h6>
+              <button
+                onClick={() =>
+                  toggleFavorite(
+                    favorite.episode,
+                    favorite.season,
+                    favorite.show
+                  )
+                }
+              >
+                <AiFillHeart />
+              </button>
+              <p className="episode-description">
+                {favorite.episode.description}
+              </p>
+              <p>Added to Favs: {formatDate(favorite.dateAdded)}</p>
+              <p>Updated: {formatDate(favorite.show.updated)}</p>
+              <button
+                className="play-button"
+                onClick={() => playEpisode(favorite.episode)}
+              >
+                Play
+              </button>
+            </div>
+          ))}
+      </ul>
     </div>
   );
 };

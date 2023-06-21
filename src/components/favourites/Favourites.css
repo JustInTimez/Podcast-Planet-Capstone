@@ -4,6 +4,7 @@
 
 .sorting-fav-options label {
     color: #fff;
+    margin-right: 10px;
 }
 
 .sorting-fav-options select {
@@ -46,7 +47,7 @@
 
 }
 
-.episode-title {
+.episode-fav-title {
     font-size: 16px;
     margin-top: 10px;
 }
