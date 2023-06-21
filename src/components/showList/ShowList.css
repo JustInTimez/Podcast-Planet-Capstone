@@ -1,3 +1,15 @@
+.interested-in-text {
+    font-size: 22px;
+    margin-bottom: 20px;
+    font-style: italic;
+}
+
+.available-shows-text {
+    font-size: 22px;
+    margin-top: 50px;
+    font-style: italic;
+}
+
 .show-list-container {
     margin: 20px 20px 30px 20px;
     display: flex;
@@ -51,6 +63,32 @@
 /* Sorting */
 .sorting-options {
     margin: 30px 0 20px 0;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.sorting-options label {
+    color: #fff;
+}
+
+.sorting-options select {
+    padding: 5px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    background-color: #333;
+    color: #fff;
+}
+
+.sorting-options input[type="text"] {
+    padding: 5px;
+    border-radius: 4px;
+    border: 1px solid #fff;
+}
+
+.sorting-options input[type="text"]::placeholder {
+    color: #ffffff;
+    /* Update with your desired color */
 }
 
 /* Genres */
@@ -110,11 +148,6 @@
     justify-content: center;
     margin-top: 20px;
 }
-
-.load-more-button {
-    /* I need to adjust this button's styles later */
-}
-
 
 /* LOADING SPINNER */
 

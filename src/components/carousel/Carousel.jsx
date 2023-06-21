@@ -27,7 +27,6 @@ export default function Carousel({ shows, onShowClick }) {
           <div className="show-details">
             <h3 className="show-title">{show.title}</h3>
             <p className="show-seasons">Seasons: {show.seasons}</p>
-            {/* Add other show details as needed */}
           </div>
         </div>
       ))}
